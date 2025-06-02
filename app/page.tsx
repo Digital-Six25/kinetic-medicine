@@ -11,7 +11,6 @@ import { HeroSectionData, NumberedItem } from "@/types/homepage";
 
 export default function HomePage() {
   const { data, error, isLoading } = useHomepageData();
-  console.log("data", data);
 
   if (isLoading) {
     return <div>Loading...</div>;

@@ -1,18 +1,11 @@
 import { Button } from "@/components/ui/button";
-import {
-  ArrowRight,
-  Calendar,
-  Download,
-  Mail,
-  MessageCircle,
-  Phone,
-} from "lucide-react";
+import { ArrowRight, Mail, Phone } from "lucide-react";
 import Image from "next/image";
+
 const CallToAction = ({ contact }) => {
   const words = contact.title.split(" ");
   const firstTwoWords = words.slice(0, 3).join(" ");
   const restWords = words.slice(3).join(" ");
-  console.log("contact", contact);
   return (
     <div>
       {" "}

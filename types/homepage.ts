@@ -53,7 +53,7 @@ type BottomCard = {
   bottom_card_subtitle: string;
 };
 
-type SuccessStoryCard = {
+export type SuccessStoryCardType = {
   icon: string;
   review: string;
   name: string;
@@ -109,4 +109,41 @@ export interface HomepageData {
     subtitle: string;
     card: boolean;
   };
+}
+export interface ServiceTypeBullet {
+  icon: string;
+  type: string;
+}
+
+export interface ServiceType {
+  service_type_icon: string;
+  service_type_title: string;
+  service_type_subtitle: string;
+  service_type_bullet: ServiceTypeBullet[];
+  service_type_cta: string;
+}
+
+export interface ServicesWorkCard {
+  icons: string;
+  title: string;
+  subtitle: string;
+}
+
+export interface ServicesData {
+  pill: string;
+  title: string;
+  subtitle: string;
+  cta: string;
+  types: ServiceType[];
+  workTitle: string;
+  workSubtitle: string;
+  workCards: ServicesWorkCard[];
+  contact_title: string;
+  contact_subTitle: string;
+  contact_book_button: string;
+  contact_download_button: string;
+}
+
+export interface ServicePageData {
+  services: ServicesData;
 }
