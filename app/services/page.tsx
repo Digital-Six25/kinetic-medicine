@@ -3,15 +3,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useServicePageData } from "@/hooks/useServicePageData";
-import {
-  Award,
-  CheckCircle,
-  Clock,
-  Heart,
-  Target,
-  Users,
-  Zap,
-} from "lucide-react";
 import Image from "next/image";
 
 export default function ServicesPage() {
@@ -29,7 +20,6 @@ export default function ServicesPage() {
     return <div>No data available</div>;
   }
   const service = data.services;
-  console.log("service", service);
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
