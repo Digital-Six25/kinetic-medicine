@@ -26,7 +26,7 @@ export function MainNavigation() {
         <DropdownMenu trigger="Contact" items={contactDropdownItems} />
         <Button className="bg-gradient-to-r from-[#F26920] to-[#F8A21F] hover:from-[#F8A21F] hover:to-[#F26920] text-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
           <Calendar className="w-4 h-4 mr-2" />
-          Book Assessment
+          <Link href={"/contact#booking"}>Book Assessment</Link>
         </Button>
       </nav>
 
