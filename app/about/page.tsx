@@ -50,7 +50,7 @@ export default function AboutPage() {
               <p className="text-lg text-gray-600 mb-6">{data.story_text}</p>
               <div className="flex items-center space-x-6">
                 {data.story_numbers.map((number, i) => (
-                  <div className="text-center">
+                  <div key={i} className="text-center">
                     <div className="text-3xl font-bold text-[#F26920]">
                       {number.number}
                     </div>
