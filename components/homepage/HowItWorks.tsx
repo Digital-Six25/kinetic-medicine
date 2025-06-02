@@ -1,13 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { HowItWorksData } from "@/types/homepage";
-import {
-  ArrowRight,
-  Download,
-  FileText,
-  Target,
-  TrendingUp,
-  Users,
-} from "lucide-react";
+import { ArrowRight, Download } from "lucide-react";
 
 interface HowItWorks {
   howItWorks: HowItWorksData;
@@ -35,7 +28,7 @@ const HowItWorks = ({ howItWorks }: HowItWorks) => {
                   <div className="flex items-center justify-between mb-6">
                     <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow">
                       <img
-                        src={item.how_it_works_icons}
+                        src={item.how_it_works_icons || "/placeholder.svg"}
                         alt={item.title + " icon"}
                         className="w-8 h-8"
                       />
