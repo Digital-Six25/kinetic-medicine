@@ -239,3 +239,61 @@ export interface EligibilityData {
   eligibility_cta2_subtitle: string;
   eligibility_cta2_btn: string;
 }
+// STORY PAGE TYPES
+export interface StoryNumber {
+  number: string;
+  title: string;
+}
+
+export interface StoryValueCard {
+  icons: string;
+  title: string;
+  subtitle: string;
+}
+
+export interface StoryTeamCard {
+  img: string;
+  name: string;
+  designation: string;
+  desc: string;
+  tags: { tag: string }[];
+  rating: string;
+}
+
+export interface StoryQualification {
+  icon: string;
+  title: string;
+  subtitle: string;
+}
+
+export interface StoryWhy {
+  icon: string;
+  title: string;
+  subtitle: string;
+}
+
+export interface StorySectionData {
+  story_hero_pill: string;
+  story_hero_title: string;
+  story_hero_subtitle: string;
+  story_title: string;
+  story_text: string;
+  story_numbers: StoryNumber[];
+  story_img: string;
+  story_value_title: string;
+  story_value_subtitle: string;
+  story_value_cards: StoryValueCard[];
+  story_team_title: string;
+  story_team_subtitle: string;
+  story_team_card: StoryTeamCard[];
+  story_qualification_title: string;
+  story_qualification_subtitle: string;
+  story_qualifications: StoryQualification[];
+  story_why_title_: string;
+  story_why_subtitle: string;
+  story_why: StoryWhy[];
+  story_cta_title: string;
+  story_cta_subtitle: string;
+  story_cta_btn1: string;
+  story_cta_btn2: string;
+}

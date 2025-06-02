@@ -3,14 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useEligibilityPageData } from "@/hooks/useEligibilityPageData";
-import {
-  CheckCircle,
-  Download,
-  FileText,
-  HelpCircle,
-  Phone,
-  Users,
-} from "lucide-react";
+import { Download, Phone } from "lucide-react";
 import Image from "next/image";
 
 export default function NDISSupport() {
@@ -27,7 +20,7 @@ export default function NDISSupport() {
   if (!data) {
     return <div>No data available</div>;
   }
-  console.log("data", data);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
