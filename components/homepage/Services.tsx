@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { AreaOfExpertiseData } from "@/types/homepage";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-const Services = ({ services }: AreaOfExpertiseData) => {
+const Services = ({ services }: { services: AreaOfExpertiseData }) => {
   return (
     <div>
       <section className="py-20">
@@ -39,20 +39,28 @@ const Services = ({ services }: AreaOfExpertiseData) => {
                     {services.large_card.subtitle}
                   </p>
                   <ul className="space-y-3 mb-8">
-                    {services.large_card.bullet.map((item, i) => (
-                      <li key={i} className="flex items-center">
-                        <Image
-                          src={item.areas_of_expertise_large_card_icon}
-                          height={32}
-                          width={32}
-                          className="filter invert"
-                          alt="icon"
-                        />
-                        <span className="text-white/90">
-                          {item.areas_of_expertise_large_card_text}
-                        </span>
-                      </li>
-                    ))}
+                    {services.large_card.bullet.map(
+                      (
+                        item: {
+                          areas_of_expertise_large_card_icon: string;
+                          areas_of_expertise_large_card_text: string;
+                        },
+                        i: number
+                      ) => (
+                        <li key={i} className="flex items-center">
+                          <Image
+                            src={item.areas_of_expertise_large_card_icon}
+                            height={32}
+                            width={32}
+                            className="filter invert"
+                            alt="icon"
+                          />
+                          <span className="text-white/90">
+                            {item.areas_of_expertise_large_card_text}
+                          </span>
+                        </li>
+                      )
+                    )}
                   </ul>
                   <Button className="bg-white text-[#F26920] hover:bg-gray-100 shadow-lg hover:shadow-xl transition-all duration-300">
                     {services.large_card.cta}{" "}
@@ -64,57 +72,80 @@ const Services = ({ services }: AreaOfExpertiseData) => {
 
             {/* Smaller Service Cards */}
             <div className="space-y-8">
-              {services.side_cards.map((item, i) => (
-                <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#F26920] to-[#F8A21F] rounded-xl flex items-center justify-center mb-4">
-                    <Image
-                      src={item.side_card_icon}
-                      height={32}
-                      width={32}
-                      className="filter invert"
-                      alt="icon"
-                    />
-                  </div>
-                  <h3 className="text-xl font-bold text-[#323739] mb-3">
-                    {item.side_card_title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    {item.side_card_subtitle}
-                  </p>
-                  <Button
-                    variant="outline"
-                    className="border-[#F26920] text-[#F26920] hover:bg-[#F26920] hover:text-white"
+              {services.side_cards.map(
+                (
+                  item: {
+                    side_card_icon: string;
+                    side_card_title: string;
+                    side_card_subtitle: string;
+                    side_card_cta: string;
+                  },
+                  i: number
+                ) => (
+                  <div
+                    key={i}
+                    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100"
                   >
-                    {item.side_card_cta} <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </div>
-              ))}
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#F26920] to-[#F8A21F] rounded-xl flex items-center justify-center mb-4">
+                      <Image
+                        src={item.side_card_icon || "/placeholder.svg"}
+                        height={32}
+                        width={32}
+                        className="filter invert"
+                        alt="icon"
+                      />
+                    </div>
+                    <h3 className="text-xl font-bold text-[#323739] mb-3">
+                      {item.side_card_title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">
+                      {item.side_card_subtitle}
+                    </p>
+                    <Button
+                      variant="outline"
+                      className="border-[#F26920] text-[#F26920] hover:bg-[#F26920] hover:text-white"
+                    >
+                      {item.side_card_cta}{" "}
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </div>
+                )
+              )}
             </div>
 
             {/* Additional Services */}
             <div className="lg:col-span-3 grid md:grid-cols-3 gap-6">
-              {services.bottom_card.map((item, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
-                >
-                  <div className="w-12 h-12 bg-gradient-to-br from-[#F26920] to-[#F8A21F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Image
-                      src={item.bottom_card_icon}
-                      height={32}
-                      width={32}
-                      className="filter invert"
-                      alt="icon"
-                    />
+              {services.bottom_card.map(
+                (
+                  item: {
+                    bottom_card_icon: string;
+                    bottom_card_title: string;
+                    bottom_card_subtitle: string;
+                  },
+                  index: number
+                ) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 group"
+                  >
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#F26920] to-[#F8A21F] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Image
+                        src={item.bottom_card_icon}
+                        height={32}
+                        width={32}
+                        className="filter invert"
+                        alt="icon"
+                      />
+                    </div>
+                    <h3 className="text-lg font-bold text-[#323739] mb-2">
+                      {item.bottom_card_title}
+                    </h3>
+                    <p className="text-gray-600 text-sm">
+                      {item.bottom_card_subtitle}
+                    </p>
                   </div>
-                  <h3 className="text-lg font-bold text-[#323739] mb-2">
-                    {item.bottom_card_title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {item.bottom_card_subtitle}
-                  </p>
-                </div>
-              ))}
+                )
+              )}
             </div>
           </div>
         </div>
