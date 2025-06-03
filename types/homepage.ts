@@ -25,17 +25,25 @@ export type StatItem = {
   stats_text: string;
 };
 
-export interface HowItWorksCard {
-  how_it_works_icons: string;
+export interface HowItWorksBullet {
+  icon: string;
   title: string;
   subtitle: string;
 }
 
 export interface HowItWorksData {
+  pill: string;
   title: string;
   subtitle: string;
-  cards: HowItWorksCard[];
+  bullets: HowItWorksBullet[];
+  img: string;
   cta: string;
+  rating: {
+    icon: string;
+    rating: number;
+    rating_name: string;
+    star_num: number;
+  };
 }
 
 // AREAS OF EXPERTISE SECTION TYPES

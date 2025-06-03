@@ -38,10 +38,13 @@ export function useHomepageData() {
         })),
         numbered_items: acf.numbered_items || [],
         how_it_works: {
+          pill: acf.how_it_works_pill,
           title: acf.how_it_works_title,
           subtitle: acf.how_it_works_subtitle,
-          cards: acf.how_it_works_cards,
+          bullets: acf.how_it_works_bullets,
+          img: acf.how_it_works_img,
           cta: acf.how_it_works_cta,
+          rating: acf.how_it_works_rating,
         },
         areas_of_expertise: {
           pill: acf.area_of_expertise_pill,

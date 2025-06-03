@@ -2,20 +2,19 @@ import { Button } from "@/components/ui/button";
 import { AreaOfExpertiseData } from "@/types/homepage";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import Image from "next/image";
-import { BackgroundShapes } from "../background-shapes";
-import { FloatingElements } from "../floating-elements";
-import { FadeIn, StaggeredFadeIn } from "../animations";
-import { Badge } from "../ui/badge";
-import { Card, CardContent } from "../ui/card";
 import Link from "next/link";
 import {
-  ReactElement,
   JSXElementConstructor,
+  ReactElement,
   ReactNode,
   ReactPortal,
 } from "react";
+import { FadeIn, StaggeredFadeIn } from "../animations";
+import { BackgroundShapes } from "../background-shapes";
+import { FloatingElements } from "../floating-elements";
+import { Badge } from "../ui/badge";
+import { Card, CardContent } from "../ui/card";
 const Services = ({ services }: { services: AreaOfExpertiseData }) => {
-  console.log("services", services);
   return (
     <div>
       <section className="py-20 bg-gray-50 relative overflow-hidden">

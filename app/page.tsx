@@ -35,8 +35,8 @@ export default function HomePage() {
     <div className="min-h-screen bg-white overflow-hidden">
       <HeroSection hero={hero} />
       <DynamicStats stats={stats} />
-      {/* <HowItWorks howItWorks={howItWorks} /> */}
       <Services services={areaOfExpertise} />
+      <HowItWorks howItWorks={howItWorks} />
       <Testimonials successStories={successStories} />
       <CallToAction contact={contact} />
     </div>
