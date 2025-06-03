@@ -1,13 +1,20 @@
 // types/homepage.ts
-
+export interface HeroFeatures {
+  hero_feature: string;
+}
 export interface HeroSectionData {
   hero_title: string;
   hero_pill: string;
   hero_subtitle: string;
   hero_cta: string;
+  hero_cta_1: string;
   hero_image_1?: string;
-  hero_image_2?: string;
-  hero_image_3?: string;
+  hero_features: HeroFeatures[];
+  hero_counter: {
+    icon: string;
+    number: string;
+    text: string;
+  };
 }
 
 export interface NumberedItem {
@@ -81,9 +88,8 @@ export interface HomepageData {
     hero_title: string;
     hero_subtitle: string;
     hero_cta: string;
+    hero_cta_1: string;
     hero_image_1: string;
-    hero_image_2: string;
-    hero_image_3: string;
   };
   stats_section: StatItem[];
   numbered_items: NumberedItem[];

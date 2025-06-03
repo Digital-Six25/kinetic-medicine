@@ -22,9 +22,14 @@ export function useHomepageData() {
           hero_title: acf.hero_title,
           hero_subtitle: acf.hero_subtitle,
           hero_cta: acf.hero_cta,
+          hero_cta_1: acf.hero_cta_1,
           hero_image_1: acf.hero_image_1,
-          hero_image_2: acf.hero_image_2,
-          hero_image_3: acf.hero_image_3,
+          hero_features: acf.hero_features || [],
+          hero_counter: {
+            icon: acf.hero_counter.icon,
+            text: acf.hero_counter.text,
+            number: acf.hero_counter.number,
+          },
         },
         stats_section: (acf.stats_section || []).map((item: any) => ({
           stats_icon: item.stats_icon,
