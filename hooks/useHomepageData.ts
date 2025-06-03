@@ -18,6 +18,7 @@ export function useHomepageData() {
 
       return {
         hero_section: {
+          hero_pill: acf.hero_pill,
           hero_title: acf.hero_title,
           hero_subtitle: acf.hero_subtitle,
           hero_cta: acf.hero_cta,

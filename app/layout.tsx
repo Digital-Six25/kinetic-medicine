@@ -1,12 +1,16 @@
-import type React from "react";
+import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
+import type React from "react";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import { Footer } from "@/components/footer";
 import { Providers } from "./providers";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title:
@@ -31,7 +35,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={roboto.className}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -44,10 +48,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body
-        className={inter.className}
-        style={{ fontFamily: "Roboto, sans-serif" }}
-      >
+      <body>
         <Providers>
           <Navbar />
           {children}

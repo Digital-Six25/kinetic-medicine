@@ -2,6 +2,7 @@
 
 export interface HeroSectionData {
   hero_title: string;
+  hero_pill: string;
   hero_subtitle: string;
   hero_cta: string;
   hero_image_1?: string;

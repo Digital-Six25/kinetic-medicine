@@ -1,4 +1,4 @@
-import type { Config } from "tailwindcss"
+import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
@@ -53,10 +53,21 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Brand colors
-        "kinetic-orange": "#F26920",
-        "kinetic-orange-light": "#F8A21F",
-        "kinetic-gray": "#323739",
+        // Custom brand colors
+        orange: {
+          primary: "#F26920",
+          secondary: "#F8A21F",
+        },
+        gray: {
+          black: "#323739",
+        },
+        chart: {
+          "1": "hsl(var(--chart-1))",
+          "2": "hsl(var(--chart-2))",
+          "3": "hsl(var(--chart-3))",
+          "4": "hsl(var(--chart-4))",
+          "5": "hsl(var(--chart-5))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -72,50 +83,51 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "fade-in": {
-          from: { opacity: "0", transform: "translateY(10px)" },
-          to: { opacity: "1", transform: "translateY(0)" },
+        float: {
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "25%": { transform: "translateY(-10px) rotate(5deg)" },
+          "50%": { transform: "translateY(5px) rotate(-5deg)" },
+          "75%": { transform: "translateY(-5px) rotate(2deg)" },
         },
-        "slide-in": {
-          from: { transform: "translateX(-100%)" },
-          to: { transform: "translateX(0)" },
+        pulse: {
+          "0%, 100%": { opacity: "1" },
+          "50%": { opacity: "0.5" },
+        },
+        bounce: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        },
+        scale: {
+          "0%, 100%": { transform: "scale(1)" },
+          "50%": { transform: "scale(1.1)" },
+        },
+        "spin-slow": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
+        scroll: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.5s ease-out",
-        "slide-in": "slide-in 0.3s ease-out",
-      },
-      fontFamily: {
-        roboto: ["Roboto", "sans-serif"],
-      },
-      fontSize: {
-        xs: ["0.75rem", { lineHeight: "1rem" }],
-        sm: ["0.875rem", { lineHeight: "1.25rem" }],
-        base: ["1rem", { lineHeight: "1.5rem" }],
-        lg: ["1.125rem", { lineHeight: "1.75rem" }],
-        xl: ["1.25rem", { lineHeight: "1.75rem" }],
-        "2xl": ["1.5rem", { lineHeight: "2rem" }],
-        "3xl": ["1.875rem", { lineHeight: "2.25rem" }],
-        "4xl": ["2.25rem", { lineHeight: "2.5rem" }],
-        "5xl": ["3rem", { lineHeight: "1" }],
-      },
-      spacing: {
-        "18": "4.5rem",
-        "88": "22rem",
-        "128": "32rem",
-      },
-      maxWidth: {
-        "8xl": "88rem",
-        "9xl": "96rem",
-      },
-      screens: {
-        xs: "475px",
+        float: "float 15s ease-in-out infinite",
+        pulse: "pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+        bounce: "bounce 2s infinite",
+        wiggle: "wiggle 1s ease-in-out infinite",
+        scale: "scale 2s infinite",
+        "spin-slow": "spin-slow 3s linear infinite",
+        scroll: "scroll 30s linear infinite",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config
+} satisfies Config;
 
-export default config
+export default config;
