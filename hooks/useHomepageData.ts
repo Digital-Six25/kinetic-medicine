@@ -44,17 +44,10 @@ export function useHomepageData() {
           cta: acf.how_it_works_cta,
         },
         areas_of_expertise: {
+          pill: acf.area_of_expertise_pill,
           title: acf.area_of_expertise_title,
           subtitle: acf.areas_of_expertise_subtitle,
-          large_card: {
-            icon: acf.areas_of_expertise_large_card_icon,
-            title: acf.areas_of_expertise_large_card_title,
-            subtitle: acf.areas_of_expertise_large_card_subtitle,
-            bullet: acf.areas_of_expertise_large_card_bullet,
-            cta: acf.area_of_expertise_large_card_cta,
-          },
-          side_cards: acf.area_of_expertise_side_cards,
-          bottom_card: acf.area_of_expertise_bottom_card,
+          card: acf.area_of_expertise_card,
         },
         success_stories: {
           title: acf.success_stories_title,

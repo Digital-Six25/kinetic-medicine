@@ -10,15 +10,13 @@ import Link from "next/link";
 import { CountUp, FadeIn } from "@/components/animations";
 import { BackgroundShapes } from "@/components/background-shapes";
 import { FloatingElements } from "@/components/floating-elements";
-import { HeroSectionData, NumberedItem } from "@/types/homepage";
+import { HeroSectionData } from "@/types/homepage";
 
 interface HeroSectionProps {
   hero: HeroSectionData;
-  numberedItems: NumberedItem[];
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ hero, numberedItems }) => {
-  console.log("hero", hero);
+const HeroSection: React.FC<HeroSectionProps> = ({ hero }) => {
   return (
     <section className="bg-gradient-to-br from-orange-primary/5 to-indigo-100 py-20 relative overflow-hidden">
       <BackgroundShapes />
