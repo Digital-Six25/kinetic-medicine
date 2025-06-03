@@ -61,6 +61,12 @@ export function useHomepageData() {
           subtitle: acf.contact_subtitle,
           card: acf.contact_card,
         },
+        img_gallery: {
+          pill: acf.img_gallery.pill,
+          title: acf.img_gallery.title,
+          subtitle: acf.img_gallery.subtitle,
+          images: acf.img_gallery.images || [],
+        },
       };
     },
   });

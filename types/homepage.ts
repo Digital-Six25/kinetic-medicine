@@ -74,12 +74,25 @@ export type AreaOfExpertiseData = {
   };
 };
 
+// IMAGE GALLERY
+export interface ImgGalleryImage {
+  img: string;
+}
+
+export interface ImgGallery {
+  pill: string;
+  title: string;
+  subtitle: string;
+  images: ImgGalleryImage[];
+}
+
 // HOMEPAGE DATA TYPES
 export interface HomepageData {
   hero_section: HeroSectionData;
   stats_section: StatItem[];
   how_it_works: HowItWorksData;
   areas_of_expertise: AreaOfExpertiseData;
+  img_gallery: ImgGallery;
 
   success_stories: {
     title: string;
