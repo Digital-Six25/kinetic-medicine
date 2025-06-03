@@ -1,80 +1,79 @@
 import Image from "next/image";
+import { FadeIn, StaggeredFadeIn } from "../animations";
+import { Badge } from "../ui/badge";
+import { Card, CardContent } from "../ui/card";
+import { Star } from "lucide-react";
+import { TestimonialsSection } from "@/types/homepage";
 
-const Testimonials = ({ successStories }) => {
-  const words = successStories.title.split(" ");
-  const firstTwoWords = words.slice(0, 2).join(" ");
-  const rest = words.slice(2).join(" ");
+interface TestimonialsProps {
+  successStories: TestimonialsSection;
+}
+
+const Testimonials = ({ successStories }: TestimonialsProps) => {
+  const { pill, title, subtitle, cards } = successStories;
+
   return (
-    <div>
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gray-50"></div>
-        <div
-          className="absolute top-0 left-0 right-0 h-20 bg-white"
-          style={{ clipPath: "ellipse(100% 100% at 50% 0%)" }}
-        ></div>
-
-        <div className="container mx-auto px-4 relative z-10">
+    <section className="py-20 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <FadeIn direction="up">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-[#323739] mb-6">
-              <span>{firstTwoWords}</span>
-              <br />
-              <span className="text-orange-500">{rest}</span>
-            </h2>
+            <Badge className="mb-4 bg-green-100 text-green-800">{pill}</Badge>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">{title}</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              {subtitle}
+            </p>
           </div>
+        </FadeIn>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {successStories.card.map(
-              (
-                testimonial: {
-                  icon: string;
-                  review: string;
-                  name: string;
-                  designation: string;
-                },
-                index: number
-              ) => (
-                <div key={index} className="group">
-                  <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-4 relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-[#F26920]/10 to-[#F8A21F]/10 rounded-full transform translate-x-10 -translate-y-10"></div>
-
-                    <div className="relative z-10">
-                      <div className="flex text-[#F8A21F] mb-4">
-                        <Image
-                          src={testimonial.icon}
-                          height={24}
-                          width={24}
-                          alt="icon"
-                        />
-                      </div>
-
-                      <blockquote className="text-gray-700 mb-6 italic leading-relaxed">
-                        "{testimonial.review}"
-                      </blockquote>
-
-                      <div className="flex items-center">
-                        <div className="w-12 h-12 bg-gradient-to-br from-[#F26920] to-[#F8A21F] rounded-full mr-4 flex items-center justify-center">
-                          <span className="text-white font-bold text-lg">
-                            {testimonial.name.charAt(0)}
-                          </span>
-                        </div>
-                        <div>
-                          <div className="font-bold text-[#323739]">
-                            {testimonial.name}
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            {testimonial.designation}
-                          </div>
-                        </div>
-                      </div>
+        <StaggeredFadeIn
+          direction="up"
+          staggerDelay={0.1}
+          className="grid md:grid-cols-3 gap-8"
+        >
+          {cards.map((testimonial, index) => (
+            <Card key={index} className="bg-white border-0 shadow-lg">
+              <CardContent className="p-8">
+                <div className="flex items-center space-x-1 mb-4">
+                  {[...Array(Number(testimonial.rating))].map((_, i) => (
+                    <Star
+                      key={i}
+                      className="h-5 w-5 fill-yellow-400 text-yellow-400"
+                    />
+                  ))}
+                </div>
+                <blockquote className="text-gray-700 mb-6 italic">
+                  "{testimonial.text}"
+                </blockquote>
+                <div className="flex items-center space-x-4">
+                  <Image
+                    src={
+                      testimonial.profile_photo ||
+                      "/placeholder.svg?height=80&width=80"
+                    }
+                    alt={testimonial.patient_name}
+                    width={60}
+                    height={60}
+                    className="rounded-full object-cover"
+                  />
+                  <div>
+                    <div className="font-semibold text-gray-900">
+                      {testimonial.patient_name}
+                    </div>
+                    <div className="text-sm text-gray-600">
+                      {testimonial.patient_type}
+                    </div>
+                    <div className="text-xs text-orange-primary mt-1">
+                      {testimonial.patient_injury_type}
                     </div>
                   </div>
                 </div>
-              )
-            )}
-          </div>
-        </div>
-      </section>
-    </div>
+              </CardContent>
+            </Card>
+          ))}
+        </StaggeredFadeIn>
+      </div>
+    </section>
   );
 };
+
 export default Testimonials;

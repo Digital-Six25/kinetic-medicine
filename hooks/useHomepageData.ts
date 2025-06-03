@@ -53,8 +53,10 @@ export function useHomepageData() {
           card: acf.area_of_expertise_card,
         },
         success_stories: {
-          title: acf.success_stories_title,
-          card: acf.success_stories_card,
+          pill: acf.testimonials.pill,
+          title: acf.testimonials.title,
+          subtitle: acf.testimonials.subtitle,
+          cards: acf.testimonials.cards,
         },
         contact: {
           title: acf.contact_title,

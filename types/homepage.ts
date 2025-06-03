@@ -100,6 +100,23 @@ export interface LocationsSection {
   cards: LocationCard[];
 }
 
+// TESTIMONIALS DATA
+export type TestimonialCard = {
+  rating: string;
+  text: string;
+  profile_photo: string | false;
+  patient_name: string;
+  patient_type: string;
+  patient_injury_type: string;
+};
+
+export type TestimonialsSection = {
+  pill: string;
+  title: string;
+  subtitle: string;
+  cards: TestimonialCard[];
+};
+
 // HOMEPAGE DATA TYPES
 export interface HomepageData {
   hero_section: HeroSectionData;
@@ -108,11 +125,8 @@ export interface HomepageData {
   areas_of_expertise: AreaOfExpertiseData;
   img_gallery: ImgGallery;
   locations: LocationsSection;
+  success_stories: TestimonialsSection;
 
-  success_stories: {
-    title: string;
-    card: boolean;
-  };
   contact: {
     title: string;
     subtitle: string;

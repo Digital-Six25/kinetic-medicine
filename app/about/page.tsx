@@ -88,7 +88,10 @@ export default function AboutPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {data.story_value_cards.map((value, i) => (
-              <Card className="text-center border-2 hover:border-[#F26920] transition-colors">
+              <Card
+                key={i}
+                className="text-center border-2 hover:border-[#F26920] transition-colors"
+              >
                 <CardContent className="p-6">
                   <div className="w-16 h-16 bg-[#F26920] rounded-full flex items-center justify-center mx-auto mb-4">
                     <Image
