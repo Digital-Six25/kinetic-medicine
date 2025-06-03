@@ -86,6 +86,20 @@ export interface ImgGallery {
   images: ImgGalleryImage[];
 }
 
+// LOCATIONS CARDS
+export interface LocationCard {
+  img: string;
+  name: string;
+  address: string;
+}
+
+export interface LocationsSection {
+  pill: string;
+  title: string;
+  subtitle: string;
+  cards: LocationCard[];
+}
+
 // HOMEPAGE DATA TYPES
 export interface HomepageData {
   hero_section: HeroSectionData;
@@ -93,6 +107,7 @@ export interface HomepageData {
   how_it_works: HowItWorksData;
   areas_of_expertise: AreaOfExpertiseData;
   img_gallery: ImgGallery;
+  locations: LocationsSection;
 
   success_stories: {
     title: string;

@@ -5,6 +5,7 @@ import DynamicStats from "@/components/homepage/DynamicStats";
 import HeroSection from "@/components/homepage/HeroSection";
 import HowItWorks from "@/components/homepage/HowItWorks";
 import ImageGallery from "@/components/homepage/ImageGallery";
+import Locations from "@/components/homepage/Locations";
 import Services from "@/components/homepage/Services";
 import Testimonials from "@/components/homepage/Testimonials";
 import { useHomepageData } from "@/hooks/useHomepageData";
@@ -32,6 +33,7 @@ export default function HomePage() {
   const successStories = data.success_stories;
   const contact = data.contact;
   const { pill, title, subtitle, images } = data.img_gallery;
+  const locations = data.locations;
 
   return (
     <div className="min-h-screen bg-white overflow-hidden">
@@ -45,6 +47,7 @@ export default function HomePage() {
         subtitle={subtitle}
         images={images}
       />
+      <Locations locations={locations} />
       <Testimonials successStories={successStories} />
       <CallToAction contact={contact} />
     </div>
