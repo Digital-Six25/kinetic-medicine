@@ -13,10 +13,10 @@ interface ServiceLayoutProps {
   icon: React.ReactNode;
   heroImage: string;
   content: React.ReactNode;
-  features?: string[];
+  features?: Array<{ feature: string }>;
   faqs?: Array<{
     question: string;
-    answer: string;
+    answers: string;
   }>;
 }
 
@@ -82,10 +82,16 @@ export function ServiceLayout({
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-3 gap-12">
-            <div className="lg:col-span-2 space-y-8">{content}</div>
+            <div className="lg:col-span-2 space-y-8">
+              {content ? (
+                content
+              ) : (
+                <p className="text-gray-500">No service content available.</p>
+              )}
+            </div>
 
             <div className="space-y-8">
-              {features && (
+              {features && features.length > 0 && (
                 <div className="bg-gray-50 p-6 rounded-xl">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
                     Key Features
@@ -94,7 +100,7 @@ export function ServiceLayout({
                     {features.map((feature, index) => (
                       <li key={index} className="flex items-start">
                         <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700">{feature}</span>
+                        <span className="text-gray-700">{feature.feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -123,7 +129,7 @@ export function ServiceLayout({
                 </Button>
               </div>
 
-              {faqs && (
+              {faqs && faqs.length > 0 && (
                 <div className="bg-gray-50 p-6 rounded-xl">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
                     Frequently Asked Questions
@@ -134,7 +140,7 @@ export function ServiceLayout({
                         <h4 className="font-semibold text-gray-900 mb-2">
                           {faq.question}
                         </h4>
-                        <p className="text-gray-600 text-sm">{faq.answer}</p>
+                        <p className="text-gray-600 text-sm">{faq.answers}</p>
                       </div>
                     ))}
                   </div>

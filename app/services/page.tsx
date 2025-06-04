@@ -165,6 +165,7 @@ export default function ServicesPage() {
           </StaggeredFadeIn>
         </div>
       </section>
+
       {/* How It Works Section */}
       <section className="py-20 bg-gray-50 relative overflow-hidden">
         <BackgroundShapes className="opacity-50" />
