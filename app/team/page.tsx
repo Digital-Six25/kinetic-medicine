@@ -38,187 +38,6 @@ export default function TeamPage() {
     return <div>No data available</div>;
   }
   const team = data.team;
-  console.log("team", team);
-
-  // Team members data
-  const teamMembers = {
-    leadership: [
-      {
-        name: "Dr. Sarah Mitchell",
-        role: "Founder & Medical Director",
-        specialty: "Sports Medicine Physician",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "MBBS, FACSEP, PhD",
-        bio: "Dr. Sarah Mitchell founded Kinetic Medicine in 2009 after completing her sports medicine fellowship. As a former professional athlete, she experienced firsthand the challenges of sports injuries and the importance of quality care. Her vision was to create a clinic that combines cutting-edge medical expertise with a deep understanding of athletic performance.",
-        expertise: [
-          "Sports Injury Management",
-          "Athletic Performance",
-          "Exercise Prescription",
-          "Rehabilitation",
-        ],
-      },
-      {
-        name: "Dr. Mark Johnson",
-        role: "Clinical Director",
-        specialty: "Exercise Physiologist",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "PhD, AEP, ESSAM",
-        bio: "Dr. Mark Johnson brings over 15 years of experience in exercise physiology and rehabilitation. He oversees our clinical operations and ensures that all patients receive the highest standard of care. His research in exercise science has been published in numerous peer-reviewed journals.",
-        expertise: [
-          "Clinical Exercise Physiology",
-          "Chronic Disease Management",
-          "Research",
-          "Clinical Governance",
-        ],
-      },
-    ],
-    physiologists: [
-      {
-        name: "Emma Thompson",
-        role: "Lead Physiotherapist",
-        specialty: "Neurological Rehabilitation",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "BPhty, MSc Rehab",
-        bio: "Emma specializes in neurological rehabilitation and has extensive experience helping patients with conditions such as stroke, multiple sclerosis, and Parkinson's disease. Her patient-centered approach focuses on improving function and quality of life.",
-        expertise: [
-          "Neurological Conditions",
-          "Stroke Rehabilitation",
-          "Balance Training",
-          "Functional Movement",
-        ],
-      },
-      {
-        name: "Michael Davis",
-        role: "Senior Exercise Physiologist",
-        specialty: "Sports Rehabilitation",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "BExSc, AEP",
-        bio: "Michael specializes in sports rehabilitation and has worked with elite athletes across various sports. His expertise in biomechanics and functional movement helps athletes recover from injuries and improve their performance.",
-        expertise: [
-          "Sports Rehabilitation",
-          "Biomechanics",
-          "Strength & Conditioning",
-          "Return to Sport",
-        ],
-      },
-      {
-        name: "Dr. Rebecca Chen",
-        role: "Exercise Physiologist",
-        specialty: "Mental Health",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "PhD, AEP, ESSAM",
-        bio: "Dr. Chen specializes in exercise interventions for mental health conditions. Her research and clinical practice focus on how physical activity can improve psychological wellbeing and manage conditions like anxiety and depression.",
-        expertise: [
-          "Mental Health",
-          "Anxiety & Depression",
-          "Stress Management",
-          "Wellbeing Programs",
-        ],
-      },
-      {
-        name: "Thomas Wright",
-        role: "Exercise Physiologist",
-        specialty: "Cancer Support",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "MExSc, AEP",
-        bio: "Thomas has dedicated his career to supporting individuals with cancer through exercise. He helps patients manage treatment side effects, maintain strength, and improve quality of life during and after cancer treatment.",
-        expertise: [
-          "Cancer Exercise Therapy",
-          "Fatigue Management",
-          "Strength Preservation",
-          "Quality of Life",
-        ],
-      },
-    ],
-    specialists: [
-      {
-        name: "Lisa Chen",
-        role: "NDIS Support Coordinator",
-        specialty: "Disability Support",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "BSocSc, Cert IV Disability",
-        bio: "Lisa specializes in NDIS support coordination and has extensive experience helping participants navigate the NDIS system effectively. She ensures our NDIS clients receive the support they need to achieve their goals.",
-        expertise: [
-          "NDIS Navigation",
-          "Support Coordination",
-          "Disability Services",
-          "Goal Setting",
-        ],
-      },
-      {
-        name: "Dr. James Wilson",
-        role: "Neurological Rehabilitation Specialist",
-        specialty: "Neurological Conditions",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "PhD, BPhty, Cert Neuro Rehab",
-        bio: "Dr. Wilson has dedicated his career to helping individuals with neurological conditions improve their function and quality of life. His specialized knowledge in neuroplasticity informs his evidence-based approach to rehabilitation.",
-        expertise: [
-          "Neurological Rehabilitation",
-          "Stroke Recovery",
-          "Parkinson's Management",
-          "MS Support",
-        ],
-      },
-      {
-        name: "Alex Morgan",
-        role: "Senior Exercise Physiologist",
-        specialty: "Group Programs",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "MExSc, AEP",
-        bio: "Alex brings energy and expertise to our Kinetic Sessions, specializing in group exercise programs for clients of all abilities and fitness levels. His motivational approach helps clients achieve their goals in a supportive environment.",
-        expertise: [
-          "Group Exercise",
-          "Motivation",
-          "Program Design",
-          "Community Building",
-        ],
-      },
-      {
-        name: "Samantha Lee",
-        role: "Mobility Specialist",
-        specialty: "Aged Care",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "BExSc, Cert IV Aged Care",
-        bio: "Samantha's expertise in mobility and recovery techniques helps older clients improve flexibility, reduce pain, and enhance movement quality. She specializes in falls prevention and maintaining independence in older adults.",
-        expertise: [
-          "Aged Care",
-          "Falls Prevention",
-          "Mobility Training",
-          "Independence Support",
-        ],
-      },
-    ],
-    support: [
-      {
-        name: "David Park",
-        role: "Practice Manager",
-        specialty: "Operations",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "MBA, BHlthSc",
-        bio: "David oversees the day-to-day operations of Kinetic Medicine, ensuring that our facilities, systems, and processes support the delivery of exceptional patient care. His background in health administration and business management keeps our practice running smoothly.",
-        expertise: [
-          "Practice Management",
-          "Healthcare Administration",
-          "Team Leadership",
-          "Patient Experience",
-        ],
-      },
-      {
-        name: "Jessica Brown",
-        role: "Client Services Manager",
-        specialty: "Patient Support",
-        image: "/placeholder.svg?height=400&width=400",
-        qualifications: "BHlthSc, Cert IV Customer Service",
-        bio: "Jessica leads our client services team, ensuring that every patient receives a warm welcome and seamless experience from their first contact through to ongoing care. Her focus on patient satisfaction has helped build our reputation for exceptional service.",
-        expertise: [
-          "Patient Experience",
-          "Appointment Scheduling",
-          "Health Insurance",
-          "Client Communication",
-        ],
-      },
-    ],
-  };
 
   return (
     <div className="min-h-screen">
@@ -298,62 +117,39 @@ export default function TeamPage() {
             </div>
           </FadeIn>
 
-          <Tabs defaultValue="leadership" className="w-full">
+          <Tabs
+            defaultValue={team.team.tags[0]?.tag.toLowerCase()}
+            className="w-full"
+          >
             <TabsList className="grid grid-cols-4 max-w-2xl mx-auto mb-12">
               {team.team.tags.map((tag, i) => (
-                <TabsTrigger key={i} value="leadership">
+                <TabsTrigger key={i} value={tag.tag.toLowerCase()}>
                   {tag.tag}
                 </TabsTrigger>
               ))}
             </TabsList>
 
-            <TabsContent value="leadership">
-              <StaggeredFadeIn
-                direction="up"
-                staggerDelay={0.1}
-                className="grid md:grid-cols-2 gap-8"
-              >
-                {team.team.cards.map((member, index) => (
-                  <TeamMemberCard key={index} member={member} />
-                ))}
-              </StaggeredFadeIn>
-            </TabsContent>
-
-            <TabsContent value="physiologists">
-              <StaggeredFadeIn
-                direction="up"
-                staggerDelay={0.1}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-              >
-                {teamMembers.physiologists.map((member, index) => (
-                  <TeamMemberCard key={index} member={member} />
-                ))}
-              </StaggeredFadeIn>
-            </TabsContent>
-
-            <TabsContent value="specialists">
-              <StaggeredFadeIn
-                direction="up"
-                staggerDelay={0.1}
-                className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-              >
-                {teamMembers.specialists.map((member, index) => (
-                  <TeamMemberCard key={index} member={member} />
-                ))}
-              </StaggeredFadeIn>
-            </TabsContent>
-
-            <TabsContent value="support">
-              <StaggeredFadeIn
-                direction="up"
-                staggerDelay={0.1}
-                className="grid md:grid-cols-2 gap-8"
-              >
-                {teamMembers.support.map((member, index) => (
-                  <TeamMemberCard key={index} member={member} />
-                ))}
-              </StaggeredFadeIn>
-            </TabsContent>
+            {team.team.tags.map((tag, i) => (
+              <TabsContent key={i} value={tag.tag.toLowerCase()}>
+                <StaggeredFadeIn
+                  direction="up"
+                  staggerDelay={0.1}
+                  className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                  {team.team.cards
+                    .filter((member) =>
+                      member.expertise_tags.some(
+                        (t) =>
+                          t.expertise_tag.toLowerCase() ===
+                          tag.tag.toLowerCase()
+                      )
+                    )
+                    .map((member, idx) => (
+                      <TeamMemberCard key={idx} member={member} />
+                    ))}
+                </StaggeredFadeIn>
+              </TabsContent>
+            ))}
           </Tabs>
         </div>
       </section>
