@@ -1,26 +1,17 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Calendar,
-  Mail,
-  Phone,
-  Award,
-  GraduationCap,
-  Briefcase,
-  Users,
-  Heart,
-} from "lucide-react";
+import { Calendar, Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 // Import our components
-import { FloatingElements } from "@/components/floating-elements";
-import { BackgroundShapes } from "@/components/background-shapes";
 import { FadeIn, StaggeredFadeIn } from "@/components/animations";
+import { BackgroundShapes } from "@/components/background-shapes";
+import { FloatingElements } from "@/components/floating-elements";
 import { useTeamPageData } from "@/hooks/useTeamPageData";
 
 export default function TeamPage() {

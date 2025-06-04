@@ -85,20 +85,6 @@ export interface ImgGallery {
   images: ImgGalleryImage[];
 }
 
-// LOCATIONS CARDS
-export interface LocationCard {
-  img: string;
-  name: string;
-  address: string;
-}
-
-export interface LocationsSection {
-  pill: string;
-  title: string;
-  subtitle: string;
-  cards: LocationCard[];
-}
-
 // TESTIMONIALS DATA
 export type TestimonialCard = {
   rating: string;
@@ -123,7 +109,6 @@ export interface HomepageData {
   how_it_works: HowItWorksData;
   areas_of_expertise: AreaOfExpertiseData;
   img_gallery: ImgGallery;
-  locations: LocationsSection;
   success_stories: TestimonialsSection;
 
   contact: {

@@ -18,122 +18,24 @@ import Link from "next/link";
 import { FloatingElements } from "@/components/floating-elements";
 import { BackgroundShapes } from "@/components/background-shapes";
 import { FadeIn, StaggeredFadeIn } from "@/components/animations";
+import { useLocationsPageData } from "@/hooks/useLocationsPageData";
 
 export default function LocationsPage() {
-  const locations = [
-    {
-      city: "Albury",
-      address: "461B Dean Street",
-      phone: "(02) 6021 3456",
-      hours: "Mon-Fri: 7AM-6PM, Sat: 8AM-2PM",
-      image: "/placeholder.svg?height=300&width=400",
-      slug: "albury",
-      description:
-        "Our flagship location in Albury offers comprehensive exercise physiology and rehabilitation services.",
-      services: [
-        "NDIS Support",
-        "Injury Rehabilitation",
-        "Health Management",
-        "Kinetic Sessions",
-      ],
-    },
-    {
-      city: "Corowa",
-      address: "237 Honour Ave",
-      phone: "(02) 6033 2789",
-      hours: "Mon-Fri: 8AM-5PM, Sat: 9AM-1PM",
-      image: "/placeholder.svg?height=300&width=400",
-      slug: "corowa",
-      description:
-        "Serving the Corowa community with personalized exercise physiology and wellness programs.",
-      services: [
-        "Exercise Physiology",
-        "Chronic Conditions",
-        "Mobility Training",
-        "Health Assessments",
-      ],
-    },
-    {
-      city: "Forster",
-      address: "87 Macintosh Street",
-      phone: "(02) 6554 8901",
-      hours: "Mon-Fri: 7AM-6PM, Sat: 8AM-3PM",
-      image: "/placeholder.svg?height=300&width=400",
-      slug: "forster",
-      description:
-        "Coastal location providing expert care for active individuals and those managing health conditions.",
-      services: [
-        "Sports Rehabilitation",
-        "NDIS Services",
-        "Cancer Support",
-        "Group Programs",
-      ],
-    },
-    {
-      city: "Gloucester",
-      address: "777-81 Dension Street",
-      phone: "(02) 6558 1234",
-      hours: "Mon-Fri: 8AM-5PM, Sat: 9AM-12PM",
-      image: "/placeholder.svg?height=300&width=400",
-      slug: "gloucester",
-      description:
-        "Rural healthcare excellence with specialized programs for workplace injuries and chronic conditions.",
-      services: [
-        "Workplace Injuries",
-        "Rural Health",
-        "Telehealth",
-        "Home Visits",
-      ],
-    },
-    {
-      city: "Salamander Bay",
-      address: "3/263 Soldiers Point Rd",
-      phone: "(02) 4919 5678",
-      hours: "Mon-Fri: 7AM-6PM, Sat: 8AM-2PM",
-      image: "/placeholder.svg?height=300&width=400",
-      slug: "salamander-bay",
-      description:
-        "Modern facility offering comprehensive exercise physiology services in the Port Stephens area.",
-      services: [
-        "Neurological Rehab",
-        "Falls Prevention",
-        "Aquatic Therapy",
-        "Senior Programs",
-      ],
-    },
-    {
-      city: "Taree",
-      address: "70 Wynter Street",
-      phone: "(02) 6552 9012",
-      hours: "Mon-Fri: 8AM-5PM, Sat: 9AM-1PM",
-      image: "/placeholder.svg?height=300&width=400",
-      slug: "taree",
-      description:
-        "Central location serving the Manning Valley with expert exercise physiology and rehabilitation.",
-      services: [
-        "Injury Recovery",
-        "Mental Health Support",
-        "Diabetes Management",
-        "Cardiac Rehab",
-      ],
-    },
-    {
-      city: "Wingham",
-      address: "2/18 Isabella Street",
-      phone: "(02) 6553 3456",
-      hours: "Mon-Fri: 8AM-4PM, Sat: 9AM-12PM",
-      image: "/placeholder.svg?height=300&width=400",
-      slug: "wingham",
-      description:
-        "Community-focused clinic providing personalized care and specialized programs for all ages.",
-      services: [
-        "Community Programs",
-        "Youth Services",
-        "Aged Care",
-        "Disability Support",
-      ],
-    },
-  ];
+  const { data, error, isLoading } = useLocationsPageData();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading data</div>;
+  }
+
+  if (!data) {
+    return <div>No data available</div>;
+  }
+  const locations = data.locations;
+  console.log("locations", locations);
 
   return (
     <div className="min-h-screen">
@@ -145,15 +47,13 @@ export default function LocationsPage() {
           <FadeIn direction="up">
             <div className="text-center max-w-4xl mx-auto">
               <Badge className="mb-4 bg-orange-primary/10 text-orange-primary">
-                Our Locations
+                {locations.hero.pill}
               </Badge>
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
-                7 Convenient Locations Across NSW
+                {locations.hero.title}
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Quality exercise physiology and rehabilitation services are
-                always within reach. Find the Kinetic Medicine clinic nearest to
-                you and discover how we can help you achieve your health goals.
+                {locations.hero.subtitle}
               </p>
             </div>
           </FadeIn>
@@ -168,7 +68,7 @@ export default function LocationsPage() {
             staggerDelay={0.1}
             className="grid lg:grid-cols-2 gap-8"
           >
-            {locations.map((location, index) => (
+            {locations.cards.map((location, index) => (
               <Card
                 key={index}
                 className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-300"
@@ -176,8 +76,8 @@ export default function LocationsPage() {
                 <div className="grid md:grid-cols-2">
                   <div className="relative h-64 md:h-auto">
                     <Image
-                      src={location.image || "/placeholder.svg"}
-                      alt={`Kinetic Medicine ${location.city} location`}
+                      src={location.img || "/placeholder.svg"}
+                      alt={`Kinetic Medicine ${location.name} location`}
                       fill
                       className="object-cover"
                     />
@@ -185,11 +85,9 @@ export default function LocationsPage() {
                   <CardContent className="p-8 flex flex-col justify-between">
                     <div>
                       <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                        {location.city}
+                        {location.name}
                       </h3>
-                      <p className="text-gray-600 mb-4">
-                        {location.description}
-                      </p>
+                      <p className="text-gray-600 mb-4">{location.text}</p>
 
                       <div className="space-y-3 mb-6">
                         <div className="flex items-start space-x-3">
@@ -207,7 +105,7 @@ export default function LocationsPage() {
                         <div className="flex items-start space-x-3">
                           <Clock className="h-5 w-5 text-orange-primary mt-0.5 flex-shrink-0" />
                           <span className="text-gray-700">
-                            {location.hours}
+                            {location.timing}
                           </span>
                         </div>
                       </div>
@@ -223,7 +121,7 @@ export default function LocationsPage() {
                               variant="secondary"
                               className="text-xs"
                             >
-                              {service}
+                              {service.service}
                             </Badge>
                           ))}
                         </div>
@@ -232,7 +130,11 @@ export default function LocationsPage() {
 
                     <div className="flex space-x-3">
                       <Button asChild className="flex-1">
-                        <Link href={`/locations/${location.slug}`}>
+                        <Link
+                          href={`/locations/${location.name
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`}
+                        >
                           View Details
                           <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>

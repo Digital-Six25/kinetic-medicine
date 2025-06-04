@@ -33,7 +33,7 @@ export default function HomePage() {
   const successStories = data.success_stories;
   const contact = data.contact;
   const { pill, title, subtitle, images } = data.img_gallery;
-  const locations = data.locations;
+  // const locations = data.locations;
 
   return (
     <div className="min-h-screen bg-white overflow-hidden">
@@ -47,7 +47,7 @@ export default function HomePage() {
         subtitle={subtitle}
         images={images}
       />
-      <Locations locations={locations} />
+      {/* <Locations locations={locations} /> */}
       <Testimonials successStories={successStories} />
       <CallToAction contact={contact} />
     </div>
