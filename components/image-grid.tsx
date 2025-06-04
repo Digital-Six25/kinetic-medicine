@@ -18,7 +18,7 @@ export function ImageGrid({ images, className = "" }: ImageGridProps) {
         >
           <Image
             src={image.src || "/placeholder.svg"}
-            alt={image.alt}
+            alt={image.alt || "images"}
             fill
             className="object-cover hover:scale-105 transition-transform duration-300"
           />
