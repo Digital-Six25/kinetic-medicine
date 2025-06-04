@@ -1,9 +1,14 @@
 "use client";
+import { FadeIn, StaggeredFadeIn } from "@/components/animations";
+import { BackgroundShapes } from "@/components/background-shapes";
+import { FloatingElements } from "@/components/floating-elements";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useServicePageData } from "@/hooks/useServicePageData";
+import { ArrowRight, CheckCircle, Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function ServicesPage() {
   const { data, error, isLoading } = useServicePageData();
@@ -20,134 +25,222 @@ export default function ServicesPage() {
     return <div>No data available</div>;
   }
   const service = data.services;
+  const details = data.services_details;
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-[#F26920] to-[#F8A21F] text-white py-16 pt-20">
-        <div className="container mx-auto px-4 text-center">
-          <Badge className="bg-white/20 text-white mb-4">{service.pill}</Badge>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            {service.title}
-          </h1>
-          <p className="text-xl max-w-3xl mx-auto mb-8">{service.subtitle}</p>
-          <Button
-            size="lg"
-            className="bg-white text-[#F26920] hover:bg-gray-100"
-          >
-            {service.cta}
-          </Button>
+      <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20 relative overflow-hidden">
+        <BackgroundShapes />
+        <FloatingElements count={6} />
+        <div className="container mx-auto px-4">
+          <FadeIn direction="up">
+            <div className="text-center max-w-4xl mx-auto">
+              <Badge className="mb-4 bg-orange-primary/10 text-orange-primary">
+                {service.pill}
+              </Badge>
+              <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
+                {service.title}
+              </h1>
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                {service.subtitle}
+              </p>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
       {/* Main Services Grid */}
-      <section className="py-16">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Individual Exercise Programs */}
-            {service.types.map((type, i: number) => (
-              <Card
-                key={i}
-                className="border-2 hover:border-[#F26920] transition-all duration-300 hover:shadow-lg"
-              >
-                <CardContent className="p-6">
-                  <div className="w-12 h-12 bg-[#F26920] rounded-lg flex items-center justify-center mb-4">
-                    <Image
-                      src={type.service_type_icon || "n/a"}
-                      height={32}
-                      width={32}
-                      className="filter invert"
-                      alt="icon"
-                    />
+          <StaggeredFadeIn
+            direction="up"
+            staggerDelay={0.1}
+            className="grid lg:grid-cols-2 gap-12"
+          >
+            {details.map((service, index) => (
+              <Card key={index} className="overflow-hidden border-0 shadow-xl">
+                <div className="relative h-64">
+                  <Image
+                    src={service.hero.image || "/placeholder.svg"}
+                    alt={service.hero.title}
+                    fill
+                    className="object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-4 left-4 text-white">
+                    <div className="bg-orange-primary p-3 rounded-full mb-3">
+                      {service.icon}
+                    </div>
+                    <h3 className="text-2xl font-bold">{service.hero.title}</h3>
                   </div>
-                  <h3 className="text-xl font-semibold mb-3 text-[#323739]">
-                    {type.service_type_title}
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    {type.service_type_subtitle}
+                </div>
+
+                <CardContent className="p-8">
+                  <p className="text-gray-600 mb-6 text-lg">
+                    {service.hero.subtitle}
                   </p>
-                  <ul className="space-y-2 text-sm text-gray-600 mb-6">
-                    {type.service_type_bullet.map((item, i) => (
-                      <li key={i} className="flex items-center">
-                        <Image
-                          src={item.icon || "n/a"}
-                          height={32}
-                          width={32}
-                          className="filter invert"
-                          alt="icon"
-                        />
-                        {item.type}
-                      </li>
-                    ))}
-                  </ul>
-                  <Button className="w-full bg-[#F26920] hover:bg-[#F8A21F]">
-                    {type.service_type_cta}
-                  </Button>
+
+                  <div className="grid md:grid-cols-2 gap-6 mb-8">
+                    {service.features?.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-3">
+                          What's Included:
+                        </h4>
+                        <ul className="space-y-2">
+                          {service.features.map((feature, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start text-sm text-gray-600"
+                            >
+                              <CheckCircle className="h-4 w-4 text-green-500 mr-2 mt-0.5 flex-shrink-0" />
+                              {feature.feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {service.benefits?.cards?.length > 0 && (
+                      <div>
+                        <h4 className="font-semibold text-gray-900 mb-3">
+                          Key Benefits:
+                        </h4>
+                        <ul className="space-y-2">
+                          {service.benefits.cards.map((card, idx) => (
+                            <li
+                              key={idx}
+                              className="flex items-start text-sm text-gray-600"
+                            >
+                              <Star className="h-4 w-4 text-orange-secondary mr-2 mt-0.5 flex-shrink-0" />
+                              {card.title}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg mb-6">
+                    <div className="flex items-center space-x-4">
+                      <div>
+                        <div className="text-sm text-gray-600">
+                          Starting from
+                        </div>
+                        <div className="text-2xl font-bold text-orange-primary">
+                          {service.starting_from}
+                        </div>
+                      </div>
+                      <div className="h-8 w-px bg-gray-300" />
+                      <div>
+                        <div className="text-sm text-gray-600">Duration</div>
+                        <div className="font-semibold text-gray-900">
+                          {service.duration}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <Button asChild className="flex-1">
+                      <Link href="/book-appointment">
+                        Book Consultation
+                        <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                    <Button variant="outline" asChild className="flex-1">
+                      <Link
+                        href={`/services/${service.hero.title
+                          .toLowerCase()
+                          .replace(/&/g, "")
+                          .replace(/\s+/g, "-")}`}
+                      >
+                        Learn More
+                      </Link>
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </StaggeredFadeIn>
         </div>
       </section>
-
       {/* How It Works Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-gray-50 relative overflow-hidden">
+        <BackgroundShapes className="opacity-50" />
+        <FloatingElements color="text-orange-secondary" count={4} />
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#323739] mb-4">
-              {service.workTitle}
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {service.workSubtitle}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {service.workCards.map((work, i) => (
+          <FadeIn direction="up">
+            <div className="text-center mb-16">
+              <Badge className="mb-4 bg-orange-primary/10 text-orange-primary">
+                Our Process
+              </Badge>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                {service.work_title}
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                {service.work_subtitle}
+              </p>
+            </div>
+          </FadeIn>
+          <StaggeredFadeIn
+            direction="up"
+            staggerDelay={0.15}
+            className="grid md:grid-cols-4 gap-8"
+          >
+            {service.work_cards.map((work, i) => (
               <div key={i} className="text-center">
                 <div className="w-16 h-16 bg-[#F26920] rounded-full flex items-center justify-center mx-auto mb-4">
                   <Image
-                    src={work.icons || "n/a"}
+                    src={work.icon || "n/a"}
                     height={32}
                     width={32}
                     className="filter invert"
                     alt="icon"
                   />
                 </div>
-                <h3 className="font-semibold text-[#323739] mb-2">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
                   {work.title}
                 </h3>
-                <p className="text-gray-600 text-sm">{work.subtitle}</p>
+                <p className="text-gray-600">{work.subtitle}</p>
               </div>
             ))}
-          </div>
+          </StaggeredFadeIn>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-[#F26920] text-white">
+      <section className="py-20 bg-orange-primary relative overflow-hidden">
+        <FloatingElements color="text-white" count={5} />
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            {service.contact_title}
-          </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            {service.contact_subTitle}
-          </p>
+          <FadeIn direction="up">
+            <h2 className="text-4xl font-bold text-white mb-6">
+              {service.contact_title}
+            </h2>
+            <p className="text-xl text-orange-primary/70 mb-8 max-w-3xl mx-auto">
+              {" "}
+              {service.contact_subTitle}
+            </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              size="lg"
-              className="bg-white text-[#F26920] hover:bg-gray-100 font-semibold"
-            >
-              {service.contact_book_button}
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white  hover:bg-white text-[#F26920]"
-            >
-              {service.contact_download_button}
-            </Button>
-          </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button
+                size="lg"
+                variant="secondary"
+                asChild
+                className="text-lg px-8 animate-pulse text-white"
+              >
+                <Link href="/book-appointment">Book Consultation</Link>
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                asChild
+                className="text-lg px-8 border-white text-orange-primary hover:bg-white hover:text-orange-primary"
+              >
+                <Link href="/contact">Call (02) 9876 5432</Link>
+              </Button>
+            </div>
+          </FadeIn>
         </div>
       </section>
     </div>
