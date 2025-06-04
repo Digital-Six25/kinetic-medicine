@@ -69,9 +69,9 @@ export default function ServicesPage() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-4 left-4 text-white">
-                    <div className="bg-orange-primary p-3 rounded-full mb-3">
+                    {/* <div className="bg-orange-primary p-3 rounded-full mb-3">
                       {service.icon}
-                    </div>
+                    </div> */}
                     <h3 className="text-2xl font-bold">{service.hero.title}</h3>
                   </div>
                 </div>
