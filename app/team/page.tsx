@@ -21,8 +21,25 @@ import Link from "next/link";
 import { FloatingElements } from "@/components/floating-elements";
 import { BackgroundShapes } from "@/components/background-shapes";
 import { FadeIn, StaggeredFadeIn } from "@/components/animations";
+import { useTeamPageData } from "@/hooks/useTeamPageData";
 
 export default function TeamPage() {
+  const { data, error, isLoading } = useTeamPageData();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error loading data</div>;
+  }
+
+  if (!data) {
+    return <div>No data available</div>;
+  }
+  const team = data.team;
+  console.log("team", team);
+
   // Team members data
   const teamMembers = {
     leadership: [
@@ -213,15 +230,13 @@ export default function TeamPage() {
           <FadeIn direction="up">
             <div className="text-center max-w-4xl mx-auto">
               <Badge className="mb-4 bg-orange-primary/10 text-orange-primary">
-                Our Experts
+                {team.hero.pill}
               </Badge>
               <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 mb-6">
-                Meet Our Team
+                {team.hero.title}
               </h1>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Our multidisciplinary team of qualified exercise physiologists,
-                specialists, and support staff are dedicated to helping you
-                achieve your health and wellness goals.
+                {team.hero.subtitle}
               </p>
             </div>
           </FadeIn>
@@ -234,11 +249,10 @@ export default function TeamPage() {
           <FadeIn direction="up">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Our Team Values
+                {team.values.title}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                At Kinetic Medicine, our team is united by a shared commitment
-                to these core values that guide everything we do.
+                {team.values.subtitle}
               </p>
             </div>
           </FadeIn>
@@ -248,41 +262,16 @@ export default function TeamPage() {
             staggerDelay={0.1}
             className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"
           >
-            {[
-              {
-                icon: <Award className="h-8 w-8" />,
-                title: "Excellence",
-                description:
-                  "We strive for the highest standards in everything we do, from diagnosis to treatment and ongoing care.",
-              },
-              {
-                icon: <Heart className="h-8 w-8" />,
-                title: "Compassion",
-                description:
-                  "We understand the physical and emotional impact of injuries and provide caring, supportive treatment.",
-              },
-              {
-                icon: <GraduationCap className="h-8 w-8" />,
-                title: "Expertise",
-                description:
-                  "Our team maintains cutting-edge knowledge through ongoing education and evidence-based practice.",
-              },
-              {
-                icon: <Users className="h-8 w-8" />,
-                title: "Collaboration",
-                description:
-                  "We work as a team with patients, families, and other healthcare providers to achieve the best outcomes.",
-              },
-            ].map((value, index) => (
+            {team.values.cards.map((value, index) => (
               <Card key={index} className="text-center border-0 shadow-lg">
                 <CardContent className="p-8">
                   <div className="bg-orange-primary/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-orange-primary">
-                    {value.icon}
+                    <Image src={value.icon} width={32} height={32} alt="icon" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
                     {value.title}
                   </h3>
-                  <p className="text-gray-600">{value.description}</p>
+                  <p className="text-gray-600">{value.subtitle}</p>
                 </CardContent>
               </Card>
             ))}
@@ -298,27 +287,24 @@ export default function TeamPage() {
           <FadeIn direction="up">
             <div className="text-center mb-16">
               <Badge className="mb-4 bg-orange-primary/10 text-orange-primary">
-                Our Professionals
+                {team.team.pill}
               </Badge>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Meet Our Expert Team
+                {team.team.title}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Our multidisciplinary team brings together expertise from
-                various fields to provide comprehensive care for all your health
-                needs.
+                {team.team.subtitle}
               </p>
             </div>
           </FadeIn>
 
           <Tabs defaultValue="leadership" className="w-full">
             <TabsList className="grid grid-cols-4 max-w-2xl mx-auto mb-12">
-              <TabsTrigger value="leadership">Leadership</TabsTrigger>
-              <TabsTrigger value="physiologists">
-                Exercise Physiologists
-              </TabsTrigger>
-              <TabsTrigger value="specialists">Specialists</TabsTrigger>
-              <TabsTrigger value="support">Support Team</TabsTrigger>
+              {team.team.tags.map((tag, i) => (
+                <TabsTrigger key={i} value="leadership">
+                  {tag.tag}
+                </TabsTrigger>
+              ))}
             </TabsList>
 
             <TabsContent value="leadership">
@@ -327,7 +313,7 @@ export default function TeamPage() {
                 staggerDelay={0.1}
                 className="grid md:grid-cols-2 gap-8"
               >
-                {teamMembers.leadership.map((member, index) => (
+                {team.team.cards.map((member, index) => (
                   <TeamMemberCard key={index} member={member} />
                 ))}
               </StaggeredFadeIn>
@@ -379,65 +365,34 @@ export default function TeamPage() {
             <FadeIn direction="left">
               <div>
                 <Badge className="mb-4 bg-orange-primary/10 text-orange-primary">
-                  Expertise & Qualifications
+                  {team.qualification.pill}
                 </Badge>
                 <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                  Highly Qualified Professionals
+                  {team.qualification.title}
                 </h2>
                 <p className="text-xl text-gray-600 mb-8">
-                  Our team consists of highly qualified professionals with
-                  extensive education, training, and experience in their
-                  respective fields.
+                  {team.qualification.subtitle}
                 </p>
 
                 <div className="space-y-6">
-                  <div className="flex space-x-4">
-                    <div className="bg-orange-primary/10 p-3 rounded-full flex-shrink-0">
-                      <GraduationCap className="h-6 w-6 text-orange-primary" />
+                  {team.qualification.bullets.map((item, i) => (
+                    <div key={i} className="flex space-x-4">
+                      <div className="bg-orange-primary/10 p-3 rounded-full flex-shrink-0">
+                        <Image
+                          src={item.icon}
+                          width={24}
+                          height={24}
+                          alt="icon"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                          {item.title}
+                        </h3>
+                        <p className="text-gray-600">{item.subtitle}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        Advanced Degrees
-                      </h3>
-                      <p className="text-gray-600">
-                        Our team includes professionals with PhDs, Masters
-                        degrees, and specialized certifications in exercise
-                        physiology, rehabilitation, and sports medicine.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <div className="bg-orange-primary/10 p-3 rounded-full flex-shrink-0">
-                      <Briefcase className="h-6 w-6 text-orange-primary" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        Industry Experience
-                      </h3>
-                      <p className="text-gray-600">
-                        With a combined experience of over 100 years, our team
-                        has worked with thousands of patients across various
-                        settings, from elite sports to community health.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex space-x-4">
-                    <div className="bg-orange-primary/10 p-3 rounded-full flex-shrink-0">
-                      <Award className="h-6 w-6 text-orange-primary" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">
-                        Professional Accreditations
-                      </h3>
-                      <p className="text-gray-600">
-                        Our exercise physiologists are accredited with Exercise
-                        & Sports Science Australia (ESSA) and maintain ongoing
-                        professional development.
-                      </p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </FadeIn>
@@ -463,127 +418,56 @@ export default function TeamPage() {
           <FadeIn direction="up">
             <div className="text-center mb-16">
               <Badge className="mb-4 bg-green-100 text-green-800">
-                Careers
+                {team.careers.pill}
               </Badge>
               <h2 className="text-4xl font-bold text-gray-900 mb-6">
-                Join Our Team
+                {team.careers.title}
               </h2>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                We're always looking for talented and passionate professionals
-                to join our team. If you're committed to excellence in patient
-                care and want to be part of a supportive, collaborative
-                environment, we'd love to hear from you.
+                {team.careers.subtitle}
               </p>
             </div>
           </FadeIn>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Current Openings
-                </h3>
-                <ul className="space-y-4">
-                  <li className="flex items-start space-x-3">
-                    <div className="bg-orange-primary/10 p-2 rounded-full mt-1">
-                      <Briefcase className="h-5 w-5 text-orange-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">
-                        Exercise Physiologist
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        Full-time position at our Albury location
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <div className="bg-orange-primary/10 p-2 rounded-full mt-1">
-                      <Briefcase className="h-5 w-5 text-orange-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">
-                        NDIS Support Coordinator
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        Part-time position at our Forster location
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <div className="bg-orange-primary/10 p-2 rounded-full mt-1">
-                      <Briefcase className="h-5 w-5 text-orange-primary" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">
-                        Client Services Assistant
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        Casual position at our Taree location
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-                <Button asChild className="w-full mt-6">
-                  <Link href="/careers">View All Openings</Link>
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-0 shadow-lg">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  Why Work With Us
-                </h3>
-                <ul className="space-y-4">
-                  <li className="flex items-start space-x-3">
-                    <div className="bg-green-100 p-2 rounded-full mt-1">
-                      <Users className="h-5 w-5 text-green-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">
-                        Supportive Team Environment
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        Work alongside experienced professionals in a
-                        collaborative culture
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <div className="bg-green-100 p-2 rounded-full mt-1">
-                      <GraduationCap className="h-5 w-5 text-green-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">
-                        Professional Development
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        Ongoing training and education opportunities to advance
-                        your career
-                      </p>
-                    </div>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <div className="bg-green-100 p-2 rounded-full mt-1">
-                      <Heart className="h-5 w-5 text-green-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">
-                        Work-Life Balance
-                      </h4>
-                      <p className="text-gray-600 text-sm">
-                        Flexible scheduling options and a focus on employee
-                        wellbeing
-                      </p>
-                    </div>
-                  </li>
-                </ul>
-                <Button variant="outline" asChild className="w-full mt-6">
-                  <Link href="/contact">Contact Recruitment</Link>
-                </Button>
-              </CardContent>
-            </Card>
+            {team.careers.cards.map((card, i) => (
+              <Card key={i} className="border-0 shadow-lg">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                    {card.title}
+                  </h3>
+                  <ul className="space-y-4">
+                    {card.bullets.map((item, i) => (
+                      <li key={i} className="flex items-start space-x-3">
+                        <div className="bg-orange-primary/10 p-2 rounded-full mt-1">
+                          <Image
+                            src={
+                              item.icon ||
+                              "/placeholder.svg?height=500&width=600"
+                            }
+                            alt="Team qualifications"
+                            width={24}
+                            height={24}
+                            className="rounded-2xl shadow-2xl"
+                          />
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-900">
+                            {item.title}
+                          </h4>
+                          <p className="text-gray-600 text-sm">
+                            {item.subtitle}
+                          </p>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                  <Button asChild className="w-full mt-6">
+                    <Link href="/careers">{card.btn}</Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -639,7 +523,7 @@ function TeamMemberCard({ member }: { member: any }) {
     <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-300">
       <div className="relative h-64">
         <Image
-          src={member.image || "/placeholder.svg"}
+          src={member.img || "/placeholder.svg"}
           alt={member.name}
           fill
           className="object-cover"
@@ -648,24 +532,28 @@ function TeamMemberCard({ member }: { member: any }) {
         <div className="absolute bottom-4 left-4 right-4 text-white">
           <h3 className="text-xl font-bold mb-1">{member.name}</h3>
           <p className="text-sm text-white/90">{member.role}</p>
-          <p className="text-xs text-orange-primary mt-1">{member.specialty}</p>
+          <p className="text-xs text-orange-primary mt-1">
+            {member.designation}
+          </p>
         </div>
       </div>
       <CardContent className="p-6">
         <div className="mb-4">
           <Badge variant="outline" className="mb-2">
-            {member.qualifications}
+            {member.education}
           </Badge>
         </div>
-        <p className="text-gray-600 text-sm mb-4 line-clamp-3">{member.bio}</p>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+          {member.description}
+        </p>
         <div className="space-y-2">
           <h4 className="text-sm font-semibold text-gray-900">
             Areas of Expertise:
           </h4>
           <div className="flex flex-wrap gap-2">
-            {member.expertise.map((area: string, idx: number) => (
+            {member.expertise_tags.map((area: string, idx: number) => (
               <Badge key={idx} variant="secondary" className="text-xs">
-                {area}
+                {area.expertise_tag}
               </Badge>
             ))}
           </div>
