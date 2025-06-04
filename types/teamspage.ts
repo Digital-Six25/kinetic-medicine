@@ -44,13 +44,23 @@ export type TeamSection = {
       }[];
     };
     careers: {
+      pill: string;
       title: string;
-      bullets: {
-        icon: string;
+      subtitle: string;
+      cards: {
+        pill: string;
         title: string;
         subtitle: string;
+        cards: {
+          title: string;
+          bullets: {
+            icon: string; // base64-encoded SVG
+            title: string;
+            subtitle: string;
+          };
+          btn: string;
+        };
       }[];
-      btn: string;
     };
   };
 };
