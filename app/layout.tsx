@@ -1,10 +1,10 @@
 import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import type React from "react";
 import "./globals.css";
 import { Providers } from "./providers";
-import { Footer } from "@/components/Footer";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
