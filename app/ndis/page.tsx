@@ -27,7 +27,7 @@ export default function NDISPage() {
   if (!ndis) {
     return <div>No data available</div>;
   }
-  console.log("ndis", ndis);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}

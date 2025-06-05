@@ -35,7 +35,6 @@ export default function LocationsPage() {
     return <div>No data available</div>;
   }
   const locations = data.locations;
-  console.log("locations", locations);
 
   return (
     <div className="min-h-screen">
