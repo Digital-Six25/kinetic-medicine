@@ -1,4 +1,4 @@
-import { Footer } from "@/components/Footer";
+import { Footer } from "../components/Footer";
 import { Navbar } from "@/components/Navbar";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
