@@ -92,8 +92,8 @@ export default function Page({ params }: { params: { id: string } }) {
                   <span>{new Date(post.date).toLocaleDateString()}</span>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <Clock className="h-5 w-5" />
-                  <span>{post.read_time}</span>
+                  <Clock className="h-5 w-5 mr-2" />
+                  {post.read_time} min read
                 </div>
               </div>
 

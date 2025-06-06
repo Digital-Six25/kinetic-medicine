@@ -159,8 +159,8 @@ export default function BlogPage() {
                       <span>{new Date(post.date).toLocaleDateString()}</span>
                     </div>
                     <div className="flex items-center space-x-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{post.read_time}</span>
+                      <Clock className="h-4 w-4 mr-2" />
+                      {post.read_time} min read
                     </div>
                     <Badge variant="secondary">{post.category}</Badge>
                   </div>
@@ -312,7 +312,7 @@ export default function BlogPage() {
                     <div className="space-y-4">
                       {recentPosts.map((post) => (
                         <div
-                          key={post.post_id}
+                          key={post.id}
                           className="border-b border-gray-200 pb-4 last:border-b-0"
                         >
                           <h4 className="font-semibold text-gray-900 mb-2 hover:text-orange-primary transition-colors">
