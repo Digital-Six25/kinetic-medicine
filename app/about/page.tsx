@@ -11,12 +11,13 @@ import { BackgroundShapes } from "@/components/background-shapes";
 import { FloatingElements } from "@/components/floating-elements";
 import { ImageGrid } from "@/components/image-grid";
 import { useAboutPageData } from "@/hooks/useAboutPageData";
+import AboutLoading from "./loading";
 
 export default function AboutPage() {
   const { data, error, isLoading } = useAboutPageData();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <AboutLoading />;
   }
 
   if (error) {

@@ -9,12 +9,13 @@ import { useServicePageData } from "@/hooks/useServicePageData";
 import { ArrowRight, CheckCircle, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import ServicesLoading from "./loading";
 
 export default function ServicesPage() {
   const { data, error, isLoading } = useServicePageData();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <ServicesLoading />;
   }
 
   if (error) {

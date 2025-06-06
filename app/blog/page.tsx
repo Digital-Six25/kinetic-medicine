@@ -1,28 +1,28 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import {
-  Search,
-  Calendar,
-  User,
   ArrowRight,
+  Calendar,
   Clock,
-  Tag,
+  Search,
   TrendingUp,
+  User,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 // Import our components
-import { FloatingElements } from "@/components/floating-elements";
-import { BackgroundShapes } from "@/components/background-shapes";
 import { FadeIn, StaggeredFadeIn } from "@/components/animations";
+import { BackgroundShapes } from "@/components/background-shapes";
+import { FloatingElements } from "@/components/floating-elements";
 import { useBlogPageData } from "@/hooks/useBlogPageData";
 import parse from "html-react-parser";
+import BlogLoading from "./loading";
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -31,7 +31,7 @@ export default function BlogPage() {
   const { data, error, isLoading } = useBlogPageData();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <BlogLoading />;
   }
 
   if (error) {

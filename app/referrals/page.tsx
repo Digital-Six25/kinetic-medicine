@@ -25,6 +25,7 @@ import { FloatingElements } from "@/components/floating-elements";
 import { BackgroundShapes } from "@/components/background-shapes";
 import { FadeIn, StaggeredFadeIn } from "@/components/animations";
 import { useReferralPageData } from "@/hooks/useReferralPageData";
+import ReferralsLoading from "./loading";
 
 export default function ReferralsPage() {
   const [showReferralForm, setShowReferralForm] = useState(false);
@@ -32,7 +33,7 @@ export default function ReferralsPage() {
   const { data, error, isLoading } = useReferralPageData();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <ReferralsLoading />;
   }
 
   if (error) {

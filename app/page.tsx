@@ -10,12 +10,13 @@ import Services from "@/components/homepage/Services";
 import Testimonials from "@/components/homepage/Testimonials";
 import { useHomepageData } from "@/hooks/useHomepageData";
 import { AreaOfExpertiseData, HeroSectionData } from "@/types/homepage";
+import Loading from "./loading";
 
 export default function HomePage() {
   const { data, error, isLoading } = useHomepageData();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {

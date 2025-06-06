@@ -13,12 +13,13 @@ import { FadeIn, StaggeredFadeIn } from "@/components/animations";
 import { BackgroundShapes } from "@/components/background-shapes";
 import { FloatingElements } from "@/components/floating-elements";
 import { useTeamPageData } from "@/hooks/useTeamPageData";
+import TeamLoading from "./loading";
 
 export default function TeamPage() {
   const { data, error, isLoading } = useTeamPageData();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <TeamLoading />;
   }
 
   if (error) {

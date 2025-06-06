@@ -19,12 +19,13 @@ import { FloatingElements } from "@/components/floating-elements";
 import { BackgroundShapes } from "@/components/background-shapes";
 import { FadeIn, StaggeredFadeIn } from "@/components/animations";
 import { useLocationsPageData } from "@/hooks/useLocationsPageData";
+import LocationsLoading from "./loading";
 
 export default function LocationsPage() {
   const { data, error, isLoading } = useLocationsPageData();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LocationsLoading />;
   }
 
   if (error) {

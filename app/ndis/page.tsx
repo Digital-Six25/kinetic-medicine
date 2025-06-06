@@ -12,12 +12,13 @@ import { FadeIn, StaggeredFadeIn } from "@/components/animations";
 import { BackgroundShapes } from "@/components/background-shapes";
 import { FloatingElements } from "@/components/floating-elements";
 import { useNdisPageData } from "@/hooks/useNdisPageData";
+import NDISLoading from "./loading";
 
 export default function NDISPage() {
   const { data: ndis, error, isLoading } = useNdisPageData();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <NDISLoading />;
   }
 
   if (error) {
