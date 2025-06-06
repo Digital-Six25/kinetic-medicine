@@ -165,7 +165,7 @@ export default function BlogPage() {
                     <Badge variant="secondary">{post.category}</Badge>
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4 hover:text-orange-primary transition-colors">
-                    <Link href={`/blog/${post.post_id}`}>{post.title}</Link>
+                    <Link href={`/blog/${post.id}`}>{post.title}</Link>
                   </h3>
                   <div className="text-gray-600 mb-6 line-clamp-3 overflow-hidden">
                     {parse(post.text)}
@@ -178,7 +178,7 @@ export default function BlogPage() {
                       </span>
                     </div>
                     <Button variant="outline" asChild>
-                      <Link href={`/blog/${post.post_id}`}>
+                      <Link href={`/blog/${post.id}`}>
                         Read More
                         <ArrowRight className="ml-2 h-4 w-4" />
                       </Link>
@@ -231,7 +231,7 @@ export default function BlogPage() {
               >
                 {filteredPosts.map((post) => (
                   <Card
-                    key={post.post_id}
+                    key={post.id}
                     className="overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     <div className="relative h-48">
@@ -259,7 +259,7 @@ export default function BlogPage() {
                         </div>
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-3 hover:text-orange-primary transition-colors">
-                        <Link href={`/blog/${post.post_id}`}>{post.title}</Link>
+                        <Link href={`/blog/${post.id}`}>{post.title}</Link>
                       </h3>
                       <div className="text-gray-600 mb-6 line-clamp-3 overflow-hidden">
                         {parse(post.text)}
@@ -272,7 +272,7 @@ export default function BlogPage() {
                           </span>
                         </div>
                         <Button variant="outline" size="sm" asChild>
-                          <Link href={`/blog/${post.post_id}`}>Read More</Link>
+                          <Link href={`/blog/${post.id}`}>Read More</Link>
                         </Button>
                       </div>
                     </CardContent>
@@ -316,10 +316,7 @@ export default function BlogPage() {
                           className="border-b border-gray-200 pb-4 last:border-b-0"
                         >
                           <h4 className="font-semibold text-gray-900 mb-2 hover:text-orange-primary transition-colors">
-                            <Link
-                              href={`/blog/${post.post_id}`}
-                              className="text-sm"
-                            >
+                            <Link href={`/blog/${post.id}`} className="text-sm">
                               {post.title}
                             </Link>
                           </h4>
