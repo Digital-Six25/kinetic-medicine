@@ -16,6 +16,7 @@ import {
   Target,
   ChevronDown,
   MapPin,
+  Briefcase,
 } from "lucide-react";
 
 export function Navbar() {
@@ -188,6 +189,24 @@ export function Navbar() {
                             </p>
                           </div>
                         </Link>
+                        <Link
+                          href="/services/workers-compensation"
+                          className="flex items-start space-x-4 p-4 rounded-lg hover:bg-gray-50 transition-colors group"
+                          onClick={() => setIsServicesMenuOpen(false)}
+                        >
+                          <div className="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200 transition-colors">
+                            <Shield className="h-6 w-6 text-orange-primary" />
+                          </div>
+                          <div>
+                            <h3 className="font-semibold text-gray-900 group-hover:text-orange-primary">
+                              Workers Compensation
+                            </h3>
+                            <p className="text-sm text-gray-600 mt-1">
+                              Return to work rehabilitation and recovery support
+                              for workplace injuries
+                            </p>
+                          </div>
+                        </Link>
                       </div>
                     </div>
 
@@ -268,6 +287,24 @@ export function Navbar() {
                           <p className="text-sm text-gray-600 mt-1">
                             Meet our qualified exercise physiologists and
                             healthcare professionals
+                          </p>
+                        </div>
+                      </Link>
+                      <Link
+                        href="/careers"
+                        className="flex items-start space-x-4 p-4 rounded-lg hover:bg-gray-50 transition-colors group"
+                        onClick={() => setIsAboutMenuOpen(false)}
+                      >
+                        <div className="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center group-hover:bg-orange-200 transition-colors">
+                          <Briefcase className="h-6 w-6 text-orange-primary" />
+                        </div>
+                        <div>
+                          <h3 className="font-semibold text-gray-900 group-hover:text-orange-primary">
+                            Careers
+                          </h3>
+                          <p className="text-sm text-gray-600 mt-1">
+                            Join our team and make a difference in people's
+                            lives through exercise physiology
                           </p>
                         </div>
                       </Link>
@@ -538,6 +575,13 @@ export function Navbar() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               About
+            </Link>
+            <Link
+              href="/careers"
+              className="block py-2 text-gray-700 hover:text-orange-primary font-medium"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Careers
             </Link>
             <Link
               href="/locations"

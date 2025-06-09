@@ -28,7 +28,12 @@ export default function NDISPage() {
   if (!ndis) {
     return <div>No data available</div>;
   }
-
+  const colorVariants = [
+    { bg: "bg-orange-100", text: "text-orange-500" },
+    { bg: "bg-blue-100", text: "text-blue-500" },
+    { bg: "bg-green-100", text: "text-green-500" },
+    { bg: "bg-purple-100", text: "text-purple-500" },
+  ];
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -55,7 +60,7 @@ export default function NDISPage() {
                     asChild
                     className="text-lg px-8 animate-pulse"
                   >
-                    <Link href="/book-appointment">
+                    <Link href="/services">
                       <Calendar className="mr-2 h-5 w-5" />
                       {ndis.hero.cta1}
                     </Link>
@@ -151,65 +156,69 @@ export default function NDISPage() {
             staggerDelay={0.1}
             className="grid lg:grid-cols-2 gap-12"
           >
-            {ndis?.services?.cards?.map((item, i) => (
-              <Card key={i} className="border-0 shadow-xl">
-                <CardContent className="p-8">
-                  <div className="flex items-center space-x-4 mb-6">
-                    <div className="bg-orange-primary/10 p-3 rounded-full">
-                      <Image
-                        src={item.icon}
-                        width={28}
-                        height={28}
-                        alt="icon"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900">
-                        {item.title}
-                      </h3>
-                      <p className="text-orange-primary">{item.subtitle}</p>
-                    </div>
-                  </div>
+            {ndis?.services?.cards?.map((item, i) => {
+              const color = colorVariants[i % colorVariants.length];
 
-                  <p className="text-gray-600 mb-6">{item.description}</p>
+              return (
+                <Card key={i} className="border-0 shadow-xl">
+                  <CardContent className="p-8">
+                    <div className="flex items-center space-x-4 mb-6">
+                      <div className={`${color.bg} p-3 rounded-full`}>
+                        <Image
+                          src={item.icon}
+                          width={28}
+                          height={28}
+                          alt="icon"
+                        />
+                      </div>
+                      <div>
+                        <h3 className="text-2xl font-bold text-gray-900">
+                          {item.title}
+                        </h3>
+                        <p className={`${color.text}`}>{item.subtitle}</p>
+                      </div>
+                    </div>
 
-                  {item.bullets?.length > 0 && (
-                    <>
-                      {item.bullets.some((b) => b.subtitle) ? (
-                        <div className="space-y-4">
-                          {item.bullets.map((b, i) =>
-                            b.subtitle ? (
-                              <div key={i}>
-                                <h4 className="font-semibold text-gray-900 mb-2">
+                    <p className="text-gray-600 mb-6">{item.description}</p>
+
+                    {item.bullets?.length > 0 && (
+                      <>
+                        {item.bullets.some((b) => b.subtitle) ? (
+                          <div className="space-y-4">
+                            {item.bullets.map((b, i) =>
+                              b.subtitle ? (
+                                <div key={i}>
+                                  <h4 className="font-semibold text-gray-900 mb-2">
+                                    {b.title}
+                                  </h4>
+                                  <p className="text-sm text-gray-600">
+                                    {b.subtitle}
+                                  </p>
+                                </div>
+                              ) : null
+                            )}
+                          </div>
+                        ) : (
+                          <div className="grid grid-cols-2 gap-4 mt-4">
+                            {item.bullets.map((b, i) => (
+                              <div
+                                key={i}
+                                className="flex items-center space-x-2"
+                              >
+                                <CheckCircle className="h-5 w-5 text-green-500" />
+                                <span className="text-sm text-gray-700">
                                   {b.title}
-                                </h4>
-                                <p className="text-sm text-gray-600">
-                                  {b.subtitle}
-                                </p>
+                                </span>
                               </div>
-                            ) : null
-                          )}
-                        </div>
-                      ) : (
-                        <div className="grid grid-cols-2 gap-4 mt-4">
-                          {item.bullets.map((b, i) => (
-                            <div
-                              key={i}
-                              className="flex items-center space-x-2"
-                            >
-                              <CheckCircle className="h-5 w-5 text-green-500" />
-                              <span className="text-sm text-gray-700">
-                                {b.title}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
+                            ))}
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
           </StaggeredFadeIn>{" "}
         </div>
       </section>
@@ -328,7 +337,7 @@ export default function NDISPage() {
                 size="lg"
                 variant="outline"
                 asChild
-                className="text-lg px-8 border-white text-white hover:bg-white hover:text-orange-primary"
+                className="text-lg px-8 border-white text-orange-primary hover:bg-white hover:text-orange-primary"
               >
                 <Link href="/contact">
                   Learn More About NDIS Funding
