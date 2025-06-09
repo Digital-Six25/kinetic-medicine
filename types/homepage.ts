@@ -38,12 +38,8 @@ export interface HowItWorksData {
   bullets: HowItWorksBullet[];
   img: string;
   cta: string;
-  rating: {
-    icon: string;
-    rating: number;
-    rating_name: string;
-    star_num: number;
-  };
+  rating_name: string;
+  rating: number;
 }
 
 // AREAS OF EXPERTISE SECTION TYPES

@@ -45,6 +45,7 @@ export function useHomepageData() {
           img: acf.how_it_works_img,
           cta: acf.how_it_works_cta,
           rating: acf.how_it_works_rating,
+          rating_name: acf.how_it_works_rating_name,
         },
         areas_of_expertise: {
           pill: acf.area_of_expertise_pill,
