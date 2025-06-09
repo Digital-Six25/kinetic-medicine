@@ -75,7 +75,7 @@ const HowItWorks = ({ howItWorks }: HowItWorks) => {
                   </div>
                   <div>
                     <div className="flex items-center space-x-1 mb-1">
-                      {[...Array(Number(howItWorks.rating))].map((_, i) => (
+                      {[...Array(Number(howItWorks?.rating))].map((_, i) => (
                         <Star
                           key={i}
                           className="h-4 w-4 fill-yellow-400 text-yellow-400"
@@ -83,7 +83,7 @@ const HowItWorks = ({ howItWorks }: HowItWorks) => {
                       ))}
                     </div>
                     <div className="text-sm text-gray-600">
-                      {Number(howItWorks.rating)}/5 {howItWorks.rating_name}
+                      {Number(howItWorks?.rating)}/5 {howItWorks?.rating_name}
                     </div>
                   </div>
                 </div>
