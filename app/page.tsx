@@ -41,14 +41,14 @@ export default function HomePage() {
       <HeroSection hero={hero} />
       <DynamicStats stats={stats} />
       <Services services={areaOfExpertise} />
-      <HowItWorks howItWorks={howItWorks} />
+      {/* <HowItWorks howItWorks={howItWorks} /> */}
       <ImageGallery
         pill={pill}
         title={title}
         subtitle={subtitle}
         images={images}
       />
-      {/* <Locations locations={locations} /> */}
+      <Locations />
       <Testimonials successStories={successStories} />
       <CallToAction contact={contact} />
     </div>

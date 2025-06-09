@@ -7,20 +7,12 @@ import { Card, CardContent } from "../ui/card";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { useLocationsPageData } from "@/hooks/useLocationsPageData";
 
 type LocationCard = {
   img: string;
   name: string;
   address: string;
-};
-
-type LocationsProps = {
-  locations: {
-    pill: string;
-    title: string;
-    subtitle: string;
-    cards: LocationCard[];
-  };
 };
 
 const slugify = (text: string) =>
@@ -29,8 +21,12 @@ const slugify = (text: string) =>
     .replace(/\s+/g, "-")
     .replace(/[^\w-]+/g, "");
 
-const Locations = ({ locations }: LocationsProps) => {
-  const { pill, title, subtitle, cards } = locations;
+const Locations = () => {
+  const { data } = useLocationsPageData();
+
+  if (!data) {
+    return <div>No data available</div>;
+  }
 
   return (
     <section className="py-20 bg-white relative overflow-hidden">
@@ -40,11 +36,13 @@ const Locations = ({ locations }: LocationsProps) => {
         <FadeIn direction="up">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-orange-primary/10 text-orange-primary">
-              {pill}
+              {data.locations.hero.pill}
             </Badge>
-            <h2 className="text-4xl font-bold text-gray-900 mb-6">{title}</h2>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              {data.locations.hero.title}
+            </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              {subtitle}
+              {data.locations.hero.subtitle}
             </p>
           </div>
         </FadeIn>
@@ -54,7 +52,7 @@ const Locations = ({ locations }: LocationsProps) => {
           staggerDelay={0.1}
           className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
-          {cards.map((location, index) => (
+          {data.locations.cards.map((location, index) => (
             <Card
               key={index}
               className="group overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300"
