@@ -11,7 +11,6 @@ interface HowItWorks {
 }
 
 const HowItWorks = ({ howItWorks }: HowItWorks) => {
-  console.log("howItWorks", howItWorks);
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
