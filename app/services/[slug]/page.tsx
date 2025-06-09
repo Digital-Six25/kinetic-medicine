@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/animations";
 import { useServicePageData } from "@/hooks/useServicePageData";
 import { useParams } from "next/navigation";
+import parse from "html-react-parser";
 
 export default function ServiceDetailsPage() {
   const { data, error, isLoading } = useServicePageData();
@@ -47,7 +48,9 @@ export default function ServiceDetailsPage() {
               </h2>
             )}
             {service.info_text && (
-              <p className="text-gray-600 mb-6">{service.info_text}</p>
+              <div className="text-gray-600 mb-6">
+                {parse(service.info_text)}
+              </div>
             )}
           </FadeIn>
 
@@ -90,7 +93,7 @@ export default function ServiceDetailsPage() {
                   }
                   alt="NDIS support session"
                   width={500}
-                  height={400}
+                  height={200}
                   className="rounded-xl shadow-lg"
                 />
               </div>
@@ -108,7 +111,7 @@ export default function ServiceDetailsPage() {
                     <div className="text-xl font-bold text-orange-primary mb-2">
                       {benefit.title}
                     </div>
-                    <p className="text-gray-600 text-sm">{benefit.title}</p>
+                    <p className="text-gray-600 text-sm">{benefit.subtitle}</p>
                   </div>
                 ))}
               </div>
