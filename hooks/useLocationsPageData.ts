@@ -32,6 +32,7 @@ export function useLocationsPageData() {
             address: card.address,
             phone: card.phone,
             timing: card.timing,
+            location_url: card.location_url,
             services: card.services.map((s: any) => ({
               service: s.service,
             })),

@@ -36,8 +36,16 @@ export default function LocationPage() {
 
   if (!card) return <div>Location not found</div>;
 
-  const { name, address, phone, img, text, timing, services, facilities } =
-    card;
+  const {
+    name,
+    address,
+    phone,
+    img,
+    location_url,
+    timing,
+    services,
+    facilities,
+  } = card;
 
   return (
     <div className="min-h-screen">
@@ -183,19 +191,19 @@ export default function LocationPage() {
                       <Phone className="h-5 w-5 text-orange-primary" />
                       <div>
                         <div className="font-medium text-gray-900">Phone</div>
-                        <div className="text-gray-600">{location.phone}</div>
+                        <div className="text-gray-600">{phone}</div>
                       </div>
                     </div>
                     <div className="flex items-center space-x-3">
                       <MapPin className="h-5 w-5 text-orange-primary" />
                       <div>
                         <div className="font-medium text-gray-900">Address</div>
-                        <div className="text-gray-600">{location.address}</div>
+                        <div className="text-gray-600">{address}</div>
                       </div>
                     </div>
                   </div>
                   <Button asChild className="w-full mt-6">
-                    <Link href="/contact">Get Directions</Link>
+                    <Link href={location_url || "/#"}>Get Directions</Link>
                   </Button>
                 </CardContent>
               </Card>
@@ -212,9 +220,9 @@ export default function LocationPage() {
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Start Your Health Journey?
             </h2>
-            <p className="text-xl text-orange-primary/70 mb-8 max-w-3xl mx-auto">
-              Book your consultation at our {location.city} location today and
-              take the first step towards better health and wellbeing.
+            <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
+              Book your consultation at our {name} location today and take the
+              first step towards better health and wellbeing.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

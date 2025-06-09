@@ -140,7 +140,12 @@ export default function LocationsPage() {
                         </Link>
                       </Button>
                       <Button variant="outline" size="icon">
-                        <Navigation className="h-4 w-4" />
+                        <Link
+                          href={location.location_url || "/#"}
+                          target="_blank"
+                        >
+                          <Navigation className="h-4 w-4" />
+                        </Link>
                       </Button>
                     </div>
                   </CardContent>
@@ -154,7 +159,7 @@ export default function LocationsPage() {
       {/* Map Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <FadeIn direction="up">
+          {/* <FadeIn direction="up">
             <div className="text-center mb-16">
               <h2 className="text-4xl font-bold text-gray-900 mb-6">
                 Find Us on the Map
@@ -164,15 +169,15 @@ export default function LocationsPage() {
                 physiology services are accessible throughout New South Wales.
               </p>
             </div>
-          </FadeIn>
+          </FadeIn> */}
 
-          <FadeIn direction="up" delay={0.2}>
+          {/* <FadeIn direction="up" delay={0.2}>
             <div className="bg-gray-300 h-96 rounded-xl mb-8 flex items-center justify-center">
               <p className="text-gray-600 text-lg">
                 Interactive Map of All Locations
               </p>
             </div>
-          </FadeIn>
+          </FadeIn> */}
 
           <div className="grid md:grid-cols-3 gap-8">
             <Card className="border-0 shadow-lg">

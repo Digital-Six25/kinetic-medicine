@@ -9,7 +9,8 @@ export type LocationsResponse = {
     find_us: {
       title: string;
       text: string;
-      img: string | boolean; // img is `false` in the example but could also be a string (URL)
+      location_url?: string;
+      img: string | boolean;
       cards: FindUsCard[];
     };
   };
@@ -22,6 +23,7 @@ export type LocationCard = {
   address: string;
   phone: string;
   timing: string;
+  location_url?: string;
   services: {
     service: string;
   }[];
