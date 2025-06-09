@@ -242,7 +242,7 @@ export default function LocationsPage() {
                 size="lg"
                 variant="secondary"
                 asChild
-                className="text-lg px-8"
+                className="text-lg px-8 text-white"
               >
                 <Link href="/book-appointment">Book Appointment</Link>
               </Button>
@@ -250,7 +250,7 @@ export default function LocationsPage() {
                 size="lg"
                 variant="outline"
                 asChild
-                className="text-lg px-8 border-white text-white hover:bg-white hover:text-orange-primary"
+                className="text-lg px-8 border-white text-orange-primary hover:bg-white hover:text-orange-primary"
               >
                 <Link href="/contact">Contact Us</Link>
               </Button>
