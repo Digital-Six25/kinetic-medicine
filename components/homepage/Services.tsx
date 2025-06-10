@@ -14,6 +14,7 @@ import { BackgroundShapes } from "../background-shapes";
 import { FloatingElements } from "../floating-elements";
 import { Badge } from "../ui/badge";
 import { Card, CardContent } from "../ui/card";
+import { slugify } from "@/lib/slugify";
 const Services = ({ services }: { services: AreaOfExpertiseData }) => {
   return (
     <div>
@@ -105,7 +106,7 @@ const Services = ({ services }: { services: AreaOfExpertiseData }) => {
                     asChild
                     className="w-full hover:bg-orange-primary hover:text-white hover:border-orange-primary"
                   >
-                    <Link href={data.cta}>
+                    <Link href={`/services/${slugify(data.title)}`}>
                       {data.cta}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>

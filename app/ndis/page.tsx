@@ -160,7 +160,7 @@ export default function NDISPage() {
               const color = colorVariants[i % colorVariants.length];
 
               return (
-                <Card key={i} className="border-0 shadow-xl">
+                <Card key={`${item.title}-${i}`} className="border-0 shadow-xl">
                   <CardContent className="p-8">
                     <div className="flex items-center space-x-4 mb-6">
                       <div className={`${color.bg} p-3 rounded-full`}>
@@ -187,7 +187,7 @@ export default function NDISPage() {
                           <div className="space-y-4">
                             {item.bullets.map((b, i) =>
                               b.subtitle ? (
-                                <div key={i}>
+                                <div key={`${item.title}-${i}`}>
                                   <h4 className="font-semibold text-gray-900 mb-2">
                                     {b.title}
                                   </h4>
@@ -202,7 +202,7 @@ export default function NDISPage() {
                           <div className="grid grid-cols-2 gap-4 mt-4">
                             {item.bullets.map((b, i) => (
                               <div
-                                key={i}
+                                key={`${item.title}-${i}`}
                                 className="flex items-center space-x-2"
                               >
                                 <CheckCircle className="h-5 w-5 text-green-500" />

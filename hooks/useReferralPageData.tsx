@@ -46,6 +46,7 @@ export function useReferralPageData() {
             icon: card.icon,
             title: card.title,
             subtitle: card.subtitle,
+            url: card.url,
           })),
         },
         contact: {

@@ -23,6 +23,7 @@ export type ReferralFormCard = {
   icon: string;
   title: string;
   subtitle: string;
+  url: string;
 };
 
 export type ReferralForm = {

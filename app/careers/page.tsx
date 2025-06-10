@@ -13,127 +13,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useCareersPageData } from "@/hooks/useCareersPageData";
+import { slugify } from "@/lib/slugify";
 import {
   ArrowRight,
   Briefcase,
   CheckCircle,
   Clock,
-  Heart,
-  Lightbulb,
   MapPin,
   Send,
-  TrendingUp,
-  Users,
 } from "lucide-react";
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import CareersLoading from "./loading";
-import { slugify } from "@/lib/slugify";
-
-const vacancies = [
-  {
-    id: "physiotherapist",
-    title: "Physiotherapist",
-    location: "Brisbane",
-    type: "Full-time",
-    description:
-      "Join our team as a Physiotherapist to provide high-quality care to patients with various conditions. You'll work in a supportive environment with opportunities for professional growth.",
-    requirements: [
-      "Bachelor's degree in Physiotherapy",
-      "AHPRA registration",
-      "Min. 2 years experience",
-      "Strong communication skills",
-    ],
-    posted: "2 weeks ago",
-  },
-  {
-    id: "exercise-physiologist",
-    title: "Exercise Physiologist",
-    location: "Gold Coast",
-    type: "Full-time",
-    description:
-      "We're looking for an Exercise Physiologist to develop and implement exercise programs for our clients. You'll work closely with our multidisciplinary team to deliver comprehensive care.",
-    requirements: [
-      "Degree in Exercise Physiology",
-      "ESSA accreditation",
-      "Experience with NDIS clients",
-      "Passion for rehabilitation",
-    ],
-    posted: "3 days ago",
-  },
-  {
-    id: "occupational-therapist",
-    title: "Occupational Therapist",
-    location: "Brisbane",
-    type: "Part-time",
-    description:
-      "Work as an Occupational Therapist helping clients improve their independence and quality of life. You'll assess client needs and develop personalized intervention plans.",
-    requirements: [
-      "Bachelor's/Master's in Occupational Therapy",
-      "AHPRA registration",
-      "NDIS experience preferred",
-      "Client-centered approach",
-    ],
-    posted: "1 week ago",
-  },
-  {
-    id: "admin-assistant",
-    title: "Administrative Assistant",
-    location: "Gold Coast",
-    type: "Casual",
-    description:
-      "Support our clinical team by managing appointments, handling client inquiries, and maintaining administrative systems. You'll be the friendly face welcoming our clients.",
-    requirements: [
-      "Previous admin experience",
-      "Excellent organizational skills",
-      "Proficiency in MS Office",
-      "Healthcare experience preferred",
-    ],
-    posted: "Just posted",
-  },
-  {
-    id: "practice-manager",
-    title: "Practice Manager",
-    location: "Brisbane",
-    type: "Full-time",
-    description:
-      "Lead our clinical operations as Practice Manager, overseeing staff, ensuring quality care, and managing business operations. You'll play a key role in our growth and development.",
-    requirements: [
-      "5+ years in healthcare management",
-      "Strong leadership skills",
-      "Business acumen",
-      "Allied health background advantageous",
-    ],
-    posted: "3 weeks ago",
-  },
-];
-
-const benefits = [
-  {
-    icon: <Users className="h-6 w-6 text-primary" />,
-    title: "Supportive Team",
-    description:
-      "Work alongside passionate professionals in a collaborative environment",
-  },
-  {
-    icon: <TrendingUp className="h-6 w-6 text-primary" />,
-    title: "Career Growth",
-    description:
-      "Ongoing professional development and clear advancement pathways",
-  },
-  {
-    icon: <Lightbulb className="h-6 w-6 text-primary" />,
-    title: "Innovation",
-    description:
-      "Be part of a forward-thinking practice embracing new approaches",
-  },
-  {
-    icon: <Heart className="h-6 w-6 text-primary" />,
-    title: "Work-Life Balance",
-    description: "Flexible scheduling options and focus on wellbeing",
-  },
-];
 
 export default function CareersPage() {
   const { data, error, isLoading } = useCareersPageData();
@@ -150,7 +41,7 @@ export default function CareersPage() {
     return <div>No data available</div>;
   }
   const careers = data?.careers;
-  console.log("careers", careers);
+
   return (
     <main className="relative overflow-hidden">
       {/* Hero Section */}
@@ -205,7 +96,7 @@ export default function CareersPage() {
 
           <StaggeredFadeIn className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {careers.why_join.cards.map((benefit, index) => (
-              <FadeIn key={index}>
+              <FadeIn key={`${benefit.title}-${index}`}>
                 <Card className="h-full border-none shadow-md hover:shadow-lg transition-shadow">
                   <CardHeader>
                     <div className="mb-2">
@@ -242,10 +133,10 @@ export default function CareersPage() {
           </FadeIn>
 
           <StaggeredFadeIn className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {careers.vacancy.map((job) => {
+            {careers.vacancy.map((job, index) => {
               const slug = slugify(job.title);
               return (
-                <FadeIn key={slug}>
+                <FadeIn key={`${job.title}-${index}`}>
                   <Card className="h-full border-none shadow-md hover:shadow-lg transition-all hover:translate-y-[-4px]">
                     <CardHeader>
                       <div className="flex justify-between items-start">

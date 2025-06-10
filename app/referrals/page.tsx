@@ -2,28 +2,20 @@
 
 import type React from "react";
 
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Download,
-  FileText,
-  Send,
-  Users,
-  Heart,
-  Shield,
-  CheckCircle,
-} from "lucide-react";
+import { Download, FileText, Send } from "lucide-react";
 import Image from "next/image";
 import { useState } from "react";
 
 // Import our components
-import { FloatingElements } from "@/components/floating-elements";
-import { BackgroundShapes } from "@/components/background-shapes";
 import { FadeIn, StaggeredFadeIn } from "@/components/animations";
+import { BackgroundShapes } from "@/components/background-shapes";
+import { FloatingElements } from "@/components/floating-elements";
 import { useReferralPageData } from "@/hooks/useReferralPageData";
 import ReferralsLoading from "./loading";
 
@@ -43,7 +35,7 @@ export default function ReferralsPage() {
   if (!data) {
     return <div>No data available</div>;
   }
-
+  console.log("data", data);
   const handleReferralSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here
@@ -195,19 +187,9 @@ export default function ReferralsPage() {
 
                   <div className="flex space-x-4">
                     <Button asChild className="flex-1">
-                      <a href={form.title} download>
+                      <a href={form.url} download>
                         <Download className="mr-2 h-4 w-4" />
                         Download PDF
-                      </a>
-                    </Button>
-                    <Button variant="outline" asChild className="flex-1">
-                      <a
-                        href={form.title}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <FileText className="mr-2 h-4 w-4" />
-                        Preview
                       </a>
                     </Button>
                   </div>
