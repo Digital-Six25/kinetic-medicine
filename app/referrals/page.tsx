@@ -35,7 +35,7 @@ export default function ReferralsPage() {
   if (!data) {
     return <div>No data available</div>;
   }
-  console.log("data", data);
+
   const handleReferralSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission here
