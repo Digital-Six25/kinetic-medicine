@@ -29,6 +29,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import CareersLoading from "./loading";
+import { slugify } from "@/lib/slugify";
 
 const vacancies = [
   {
@@ -241,51 +242,54 @@ export default function CareersPage() {
           </FadeIn>
 
           <StaggeredFadeIn className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {careers.vacancy.map((job, id) => (
-              <FadeIn key={id}>
-                <Card className="h-full border-none shadow-md hover:shadow-lg transition-all hover:translate-y-[-4px]">
-                  <CardHeader>
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-xl">{job.title}</CardTitle>
-                      <Badge
-                        variant="outline"
-                        className="bg-primary/10 text-primary border-primary/20"
-                      >
-                        {job.type}
-                      </Badge>
-                    </div>
-                    <CardDescription className="flex items-center mt-2">
-                      <MapPin className="h-4 w-4 mr-1" /> {job.location}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 mb-4">{job.overview}</p>
-                    <div className="space-y-2">
-                      <p className="font-medium text-sm">Requirements:</p>
-                      <ul className="space-y-1">
-                        {job.requirements.map((req, i) => (
-                          <li key={i} className="flex items-start text-sm">
-                            <CheckCircle className="h-4 w-4 mr-2 text-primary shrink-0 mt-0.5" />
-                            <span>{req.requirement}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between items-center">
-                    <span className="text-sm text-gray-500 flex items-center">
-                      <Clock className="h-4 w-4 mr-1" /> {job.posted}
-                    </span>
-                    <Button variant="default" className="group" asChild>
-                      <Link href={`/careers/${id}`}>
-                        Apply Now{" "}
-                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </Button>
-                  </CardFooter>
-                </Card>
-              </FadeIn>
-            ))}
+            {careers.vacancy.map((job) => {
+              const slug = slugify(job.title);
+              return (
+                <FadeIn key={slug}>
+                  <Card className="h-full border-none shadow-md hover:shadow-lg transition-all hover:translate-y-[-4px]">
+                    <CardHeader>
+                      <div className="flex justify-between items-start">
+                        <CardTitle className="text-xl">{job.title}</CardTitle>
+                        <Badge
+                          variant="outline"
+                          className="bg-primary/10 text-primary border-primary/20"
+                        >
+                          {job.type}
+                        </Badge>
+                      </div>
+                      <CardDescription className="flex items-center mt-2">
+                        <MapPin className="h-4 w-4 mr-1" /> {job.location}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-gray-600 mb-4">{job.overview}</p>
+                      <div className="space-y-2">
+                        <p className="font-medium text-sm">Requirements:</p>
+                        <ul className="space-y-1">
+                          {job.requirements.map((req, i) => (
+                            <li key={i} className="flex items-start text-sm">
+                              <CheckCircle className="h-4 w-4 mr-2 text-primary shrink-0 mt-0.5" />
+                              <span>{req.requirement}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+                    <CardFooter className="flex justify-between items-center">
+                      <span className="text-sm text-gray-500 flex items-center">
+                        <Clock className="h-4 w-4 mr-1" /> {job.posted}
+                      </span>
+                      <Button variant="default" className="group" asChild>
+                        <Link href={`/careers/${slug}`}>
+                          Apply Now{" "}
+                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </FadeIn>
+              );
+            })}
           </StaggeredFadeIn>
         </div>
       </section>
