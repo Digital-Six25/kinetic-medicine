@@ -1,9 +1,8 @@
-import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+"use client";
+import { FadeIn, StaggeredFadeIn } from "@/components/animations";
 import { BackgroundShapes } from "@/components/background-shapes";
 import { FloatingElements } from "@/components/floating-elements";
-import { FadeIn, StaggeredFadeIn } from "@/components/animations";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,25 +12,23 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { useCareersPageData } from "@/hooks/useCareersPageData";
 import {
-  CheckCircle,
-  MapPin,
-  Clock,
   ArrowRight,
-  Send,
-  Users,
+  Briefcase,
+  CheckCircle,
+  Clock,
   Heart,
   Lightbulb,
+  MapPin,
+  Send,
   TrendingUp,
-  Briefcase,
+  Users,
 } from "lucide-react";
-
-export const metadata: Metadata = {
-  title: "Careers | Kinetic Medicine",
-  description:
-    "Join our team of passionate healthcare professionals at Kinetic Medicine and make a difference in people's lives.",
-};
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import CareersLoading from "./loading";
 
 const vacancies = [
   {
@@ -138,6 +135,21 @@ const benefits = [
 ];
 
 export default function CareersPage() {
+  const { data, error, isLoading } = useCareersPageData();
+
+  if (isLoading) {
+    return <CareersLoading />;
+  }
+
+  if (error) {
+    return <div>Error loading data</div>;
+  }
+
+  if (!data) {
+    return <div>No data available</div>;
+  }
+  const careers = data?.careers;
+  console.log("careers", careers);
   return (
     <main className="relative overflow-hidden">
       {/* Hero Section */}
@@ -147,26 +159,26 @@ export default function CareersPage() {
         <div className="container relative z-10">
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-12 items-center">
             <FadeIn className="space-y-6">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-gray-900">
-                Join Our <span className="text-primary">Team</span>
+              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl text-gray-900 mb-8">
+                {careers.hero.title}
               </h1>
-              <p className="text-xl text-gray-600 max-w-2xl">
-                Be part of a passionate team dedicated to transforming lives
-                through innovative healthcare solutions and personalized
-                treatment.
+              <p className="text-xl text-gray-600 max-w-2xl mb-8">
+                {careers.hero.subtitle}
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button size="lg" asChild>
-                  <a href="#vacancies">View Open Positions</a>
+                  <a href="#vacancies">{careers.hero.cta1}</a>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <a href="#process">How to Apply</a>
+                  <a href="#process">{careers.hero.cta2}</a>
                 </Button>
               </div>
             </FadeIn>
             <FadeIn className="relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
               <Image
-                src="/placeholder.svg?height=800&width=1200"
+                src={
+                  careers.hero.img || "/placeholder.svg?height=800&width=1200"
+                }
                 alt="Kinetic Medicine team collaborating"
                 fill
                 className="object-cover rounded-lg"
@@ -183,24 +195,30 @@ export default function CareersPage() {
         <div className="container">
           <FadeIn className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-gray-900">
-              Why Join Kinetic Medicine?
+              {careers.why_join.title}
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              We're building a team of exceptional individuals who are
-              passionate about making a difference in healthcare.
+              {careers.why_join.subtitle}
             </p>
           </FadeIn>
 
           <StaggeredFadeIn className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {benefits.map((benefit, index) => (
+            {careers.why_join.cards.map((benefit, index) => (
               <FadeIn key={index}>
                 <Card className="h-full border-none shadow-md hover:shadow-lg transition-shadow">
                   <CardHeader>
-                    <div className="mb-2">{benefit.icon}</div>
+                    <div className="mb-2">
+                      <Image
+                        src={benefit.icon || "/placeholder.svg"}
+                        width={28}
+                        height={28}
+                        alt="icon"
+                      />
+                    </div>
                     <CardTitle>{benefit.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600">{benefit.description}</p>
+                    <p className="text-gray-600">{benefit.subtitle}</p>
                   </CardContent>
                 </Card>
               </FadeIn>
@@ -223,8 +241,8 @@ export default function CareersPage() {
           </FadeIn>
 
           <StaggeredFadeIn className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {vacancies.map((job) => (
-              <FadeIn key={job.id}>
+            {careers.vacancy.map((job, id) => (
+              <FadeIn key={id}>
                 <Card className="h-full border-none shadow-md hover:shadow-lg transition-all hover:translate-y-[-4px]">
                   <CardHeader>
                     <div className="flex justify-between items-start">
@@ -241,14 +259,14 @@ export default function CareersPage() {
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-gray-600 mb-4">{job.description}</p>
+                    <p className="text-gray-600 mb-4">{job.overview}</p>
                     <div className="space-y-2">
                       <p className="font-medium text-sm">Requirements:</p>
                       <ul className="space-y-1">
                         {job.requirements.map((req, i) => (
                           <li key={i} className="flex items-start text-sm">
                             <CheckCircle className="h-4 w-4 mr-2 text-primary shrink-0 mt-0.5" />
-                            <span>{req}</span>
+                            <span>{req.requirement}</span>
                           </li>
                         ))}
                       </ul>
@@ -259,7 +277,7 @@ export default function CareersPage() {
                       <Clock className="h-4 w-4 mr-1" /> {job.posted}
                     </span>
                     <Button variant="default" className="group" asChild>
-                      <Link href={`/careers/${job.id}`}>
+                      <Link href={`/careers/${id}`}>
                         Apply Now{" "}
                         <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Link>
@@ -279,7 +297,10 @@ export default function CareersPage() {
             <FadeIn>
               <div className="relative h-[400px] rounded-lg overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=800&width=1200"
+                  src={
+                    careers.process.img ||
+                    "/placeholder.svg?height=800&width=1200"
+                  }
                   alt="Application process at Kinetic Medicine"
                   fill
                   className="object-cover rounded-lg"
@@ -288,62 +309,23 @@ export default function CareersPage() {
               </div>
             </FadeIn>
             <FadeIn className="space-y-6">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-gray-900">
-                Our Application Process
+              <h2 className="text-3xl mb-10 font-bold tracking-tight sm:text-4xl text-gray-900">
+                {careers.process.title}
               </h2>
               <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold shrink-0">
-                    1
+                {careers.process.cards.map((card, i) => (
+                  <div key={i} className="flex gap-4">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold shrink-0">
+                      {i + 1}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold mb-2">
+                        {card.title}
+                      </h3>
+                      <p className="text-gray-600">{card.subtitle}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Apply Online</h3>
-                    <p className="text-gray-600">
-                      Submit your application through our online portal with
-                      your resume and cover letter.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold shrink-0">
-                    2
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">
-                      Initial Screening
-                    </h3>
-                    <p className="text-gray-600">
-                      Our recruitment team will review your application and
-                      contact you for an initial phone interview.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold shrink-0">
-                    3
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Interview</h3>
-                    <p className="text-gray-600">
-                      Selected candidates will be invited for an in-person or
-                      video interview with our team.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex gap-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold shrink-0">
-                    4
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">
-                      Offer & Onboarding
-                    </h3>
-                    <p className="text-gray-600">
-                      Successful candidates will receive an offer and begin our
-                      comprehensive onboarding program.
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
             </FadeIn>
           </div>
@@ -355,7 +337,7 @@ export default function CareersPage() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <FadeIn className="space-y-6">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-gray-900">
+              <h2 className="text-3xl mb-8 font-bold tracking-tight sm:text-4xl text-gray-900">
                 Don't See a Suitable Position?
               </h2>
               <p className="text-lg text-gray-600">
@@ -370,129 +352,6 @@ export default function CareersPage() {
               </Button>
             </FadeIn>
           </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-16 md:py-24 bg-white">
-        <div className="container">
-          <FadeIn className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl text-gray-900">
-              What Our Team Says
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Hear from the people who make Kinetic Medicine an amazing place to
-              work.
-            </p>
-          </FadeIn>
-
-          <StaggeredFadeIn className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <FadeIn>
-              <Card className="h-full border-none shadow-md">
-                <CardContent className="pt-6">
-                  <div className="mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-lg">
-                        ★
-                      </span>
-                    ))}
-                  </div>
-                  <p className="italic text-gray-600 mb-6">
-                    "Working at Kinetic Medicine has been incredibly rewarding.
-                    The supportive team environment and opportunities for
-                    professional development have helped me grow both personally
-                    and professionally."
-                  </p>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 rounded-full bg-gray-200 mr-4 overflow-hidden relative">
-                      <Image
-                        src="/placeholder.svg?height=200&width=200"
-                        alt="Sarah Johnson"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-semibold">Sarah Johnson</p>
-                      <p className="text-sm text-gray-500">
-                        Physiotherapist, 3 years
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </FadeIn>
-            <FadeIn>
-              <Card className="h-full border-none shadow-md">
-                <CardContent className="pt-6">
-                  <div className="mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-lg">
-                        ★
-                      </span>
-                    ))}
-                  </div>
-                  <p className="italic text-gray-600 mb-6">
-                    "The collaborative approach at Kinetic Medicine allows us to
-                    provide truly comprehensive care to our clients. I've never
-                    worked somewhere with such a strong focus on both client and
-                    staff wellbeing."
-                  </p>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 rounded-full bg-gray-200 mr-4 overflow-hidden relative">
-                      <Image
-                        src="/placeholder.svg?height=200&width=200"
-                        alt="Michael Chen"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-semibold">Michael Chen</p>
-                      <p className="text-sm text-gray-500">
-                        Exercise Physiologist, 2 years
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </FadeIn>
-            <FadeIn>
-              <Card className="h-full border-none shadow-md">
-                <CardContent className="pt-6">
-                  <div className="mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-lg">
-                        ★
-                      </span>
-                    ))}
-                  </div>
-                  <p className="italic text-gray-600 mb-6">
-                    "Joining Kinetic Medicine was the best career decision I've
-                    made. The mentorship program and continuous learning
-                    opportunities have accelerated my professional growth in
-                    ways I couldn't have imagined."
-                  </p>
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 rounded-full bg-gray-200 mr-4 overflow-hidden relative">
-                      <Image
-                        src="/placeholder.svg?height=200&width=200"
-                        alt="Emma Williams"
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-semibold">Emma Williams</p>
-                      <p className="text-sm text-gray-500">
-                        Occupational Therapist, 1 year
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </FadeIn>
-          </StaggeredFadeIn>
         </div>
       </section>
 

@@ -229,7 +229,7 @@ export default function ReferralsPage() {
                 </h2>
                 <div className="space-y-6">
                   {data.information.processes.map((item, i) => (
-                    <div className="flex space-x-4">
+                    <div key={i} className="flex space-x-4">
                       <div className="bg-orange-primary text-white w-8 h-8 rounded-full flex items-center justify-center font-bold flex-shrink-0">
                         {item.num}
                       </div>
@@ -279,7 +279,7 @@ export default function ReferralsPage() {
 
           <div className="grid md:grid-cols-3 gap-8">
             {data.contact.cards.map((item, i) => (
-              <Card className="border-0 shadow-lg">
+              <Card key={i} className="border-0 shadow-lg">
                 <CardContent className="p-8 text-center">
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
                     {item.title}
