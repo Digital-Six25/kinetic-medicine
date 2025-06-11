@@ -9,6 +9,7 @@ import { FadeIn } from "@/components/animations";
 import { useServicePageData } from "@/hooks/useServicePageData";
 import { useParams } from "next/navigation";
 import parse from "html-react-parser";
+import ServiceDetailsLoading from "./loading";
 
 export default function ServiceDetailsPage() {
   const { data, error, isLoading } = useServicePageData();
@@ -22,7 +23,7 @@ export default function ServiceDetailsPage() {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-+|-+$/g, "");
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <ServiceDetailsLoading />;
   if (error) return <div>Error loading data</div>;
   if (!data?.services_details?.length) return <div>No data available</div>;
 

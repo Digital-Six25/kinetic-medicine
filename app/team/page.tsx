@@ -188,7 +188,10 @@ export default function TeamPage() {
             <FadeIn direction="right" delay={0.2}>
               <div className="relative">
                 <Image
-                  src="/placeholder.svg?height=500&width=600"
+                  src={
+                    team.qualification.img ||
+                    "/placeholder.svg?height=500&width=600"
+                  }
                   alt="Team qualifications"
                   width={600}
                   height={500}

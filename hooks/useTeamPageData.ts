@@ -42,6 +42,7 @@ export function useTeamPageData() {
             title: acf.team.qualification.title,
             subtitle: acf.team.qualification.subtitle,
             bullets: acf.team.qualification.bullets,
+            img: acf.team.qualification.image,
           },
           careers: {
             pill: acf.team.careers.pill,

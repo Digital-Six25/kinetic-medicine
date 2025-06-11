@@ -42,12 +42,12 @@ export default function HomePage() {
       <DynamicStats stats={stats} />
       <Services services={areaOfExpertise} />
       <HowItWorks howItWorks={howItWorks} />
-      <ImageGallery
+      {/* <ImageGallery
         pill={pill}
         title={title}
         subtitle={subtitle}
         images={images}
-      />
+      /> */}
       <Locations />
       <Testimonials successStories={successStories} />
       <CallToAction contact={contact} />

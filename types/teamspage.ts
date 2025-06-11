@@ -37,6 +37,7 @@ export type TeamSection = {
       pill: string;
       title: string;
       subtitle: string;
+      img: string;
       bullets: {
         icon: string; // base64-encoded SVG
         title: string;
