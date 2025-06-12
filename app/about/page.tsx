@@ -336,7 +336,7 @@ export default function AboutPage() {
           <h2 className="text-4xl font-bold text-white mb-6">
             Experience the Kinetic Medicine Difference
           </h2>
-          <p className="text-xl text-orange-primary/70 mb-8 max-w-3xl mx-auto">
+          <p className="text-xl text-white mb-8 max-w-3xl mx-auto">
             Join thousands of athletes who have trusted us with their sports
             medicine needs. Discover why we're the preferred choice for sports
             medicine in Sydney.
@@ -348,14 +348,14 @@ export default function AboutPage() {
               variant="secondary"
               className="text-lg px-8 text-white"
             >
-              Book Your Consultation
+              <Link href={"/book-appointment"}>Book Your Consultation</Link>
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="text-lg px-8 border-white text-orange-primary hover:bg-white hover:text-orange-primary"
             >
-              Take a Virtual Tour
+              <Link href={"/contact"}>Contact Us</Link>
             </Button>
           </div>
         </div>
