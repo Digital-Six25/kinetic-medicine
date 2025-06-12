@@ -50,7 +50,7 @@ const HowItWorks = ({ howItWorks }: HowItWorks) => {
 
               <div className="mt-8">
                 <Button asChild size="lg">
-                  <Link href="/services/ndis-disability-support">
+                  <Link href="/referrals">
                     {howItWorks.cta}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>

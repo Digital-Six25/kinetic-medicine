@@ -41,7 +41,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ hero }) => {
                   asChild
                   className="text-lg px-8 animate-pulse"
                 >
-                  <Link href="/book-appointment">
+                  <Link href="/services">
                     <Calendar className="mr-2 h-5 w-5" />
                     {hero.hero_cta_1}
                   </Link>
@@ -52,7 +52,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ hero }) => {
                   asChild
                   className="text-lg px-8"
                 >
-                  <Link href="/services">
+                  <Link href="/book-appointment">
                     {hero.hero_cta}
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
