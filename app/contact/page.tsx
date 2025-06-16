@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -15,11 +16,37 @@ import {
   Train,
 } from "lucide-react";
 
-// Add imports for our new components at the top
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  contactFormSchema,
+  ContactFormInput,
+} from "@/lib/validation/contactSchema";
+import { useSubmitContactForm } from "@/hooks/useSubmitContactForm";
 import { FloatingElements } from "@/components/floating-elements";
 import { BackgroundShapes } from "@/components/background-shapes";
+import { useToast } from "@/components/ui/use-toast";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function ContactPage() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ContactFormInput>({
+    resolver: zodResolver(contactFormSchema),
+  });
+
+  const { mutate, isPending, isSuccess } = useSubmitContactForm();
+
+  const onSubmit = (data: ContactFormInput) => {
+    mutate(data, {
+      onSuccess: () => {
+        reset();
+      },
+    });
+  };
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -59,15 +86,25 @@ export default function ContactPage() {
 
               <Card className="border-0 shadow-lg">
                 <CardContent className="p-8">
-                  <form className="space-y-6">
+                  <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <Label htmlFor="firstName">First Name *</Label>
-                        <Input id="firstName" required className="mt-2" />
+                        <Input
+                          id="firstName"
+                          {...register("first_name")}
+                          required
+                          className="mt-2"
+                        />
                       </div>
                       <div>
                         <Label htmlFor="lastName">Last Name *</Label>
-                        <Input id="lastName" required className="mt-2" />
+                        <Input
+                          id="lastName"
+                          {...register("last_name")}
+                          required
+                          className="mt-2"
+                        />
                       </div>
                     </div>
 
@@ -77,13 +114,19 @@ export default function ContactPage() {
                         <Input
                           id="email"
                           type="email"
+                          {...register("email")}
                           required
                           className="mt-2"
                         />
                       </div>
                       <div>
                         <Label htmlFor="phone">Phone Number</Label>
-                        <Input id="phone" type="tel" className="mt-2" />
+                        <Input
+                          id="phone"
+                          type="tel"
+                          {...register("phone")}
+                          className="mt-2"
+                        />
                       </div>
                     </div>
 
@@ -91,6 +134,7 @@ export default function ContactPage() {
                       <Label htmlFor="service">Service of Interest</Label>
                       <select
                         id="service"
+                        {...register("service")}
                         className="w-full mt-2 p-3 border border-gray-300 rounded-md"
                       >
                         <option value="">Select a service</option>
@@ -115,33 +159,69 @@ export default function ContactPage() {
                       <Label htmlFor="message">Message *</Label>
                       <Textarea
                         id="message"
-                        required
+                        {...register("message")}
                         className="mt-2 min-h-[120px]"
                         placeholder="Please describe your injury, symptoms, or how we can help you..."
                       />
                     </div>
 
-                    <div className="flex items-start space-x-3">
-                      <input
-                        type="checkbox"
-                        id="consent"
-                        className="mt-1"
-                        required
-                      />
-                      <Label
-                        htmlFor="consent"
-                        className="text-sm text-gray-600"
-                      >
-                        I consent to Kinetic Medicine contacting me about my
-                        inquiry and understand that my information will be
-                        handled according to the Privacy Policy.
-                      </Label>
-                    </div>
+                    {isSuccess ? (
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
+                        <div className="flex items-center justify-center mb-3">
+                          <div className="bg-green-100 p-2 rounded-full">
+                            <svg
+                              className="h-6 w-6 text-green-600"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth={2}
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                        <h3 className="text-lg font-semibold text-green-800 mb-2">
+                          Message Sent Successfully!
+                        </h3>
+                        <p className="text-green-700">
+                          Thank you for contacting us. We'll get back to you
+                          within 24 hours.
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="flex items-start space-x-3">
+                        <input
+                          type="checkbox"
+                          id="consent"
+                          className="mt-1"
+                          {...register("consent")}
+                          required
+                        />
+                        <Label
+                          htmlFor="consent"
+                          className="text-sm text-gray-600"
+                        >
+                          I consent to Kinetic Medicine contacting me about my
+                          inquiry and understand that my information will be
+                          handled according to the Privacy Policy.
+                        </Label>
+                      </div>
+                    )}
 
-                    <Button type="submit" className="w-full text-lg py-3">
-                      Send Message
-                      <MessageCircle className="ml-2 h-5 w-5" />
-                    </Button>
+                    {!isSuccess && (
+                      <Button
+                        type="submit"
+                        disabled={isPending}
+                        className="w-full text-lg py-3"
+                      >
+                        {isPending ? "Sending..." : "Send Message"}
+                        <MessageCircle className="ml-2 h-5 w-5" />
+                      </Button>
+                    )}
                   </form>
                 </CardContent>
               </Card>
